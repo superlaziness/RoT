@@ -3,10 +3,9 @@ import React from "react";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import path from "path";
 import Maco from "./maco";
+import Html from './html';
 
 const app = new Express();
-
-console.log(Maco);
 
 app.use("/static", Express.static(path.join(__dirname, "dist")));
 app.get("*", (req, res) => {
