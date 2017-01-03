@@ -7,11 +7,14 @@ module.exports = {
 		filename: "server.js",
 		publicPath: "/",
 	},
+	target: "node",
 	resolve: {
-		extenstions: [
+		moduleDirectories: ['node_modules'],
+		extensions: [
 			"",
 			".js",
 			".jsx",
+			".json",
 		],
 	},
 	module: {
@@ -28,6 +31,10 @@ module.exports = {
 				},
 				exclude: /node_modules/,
 			},
+			{
+				test: /\.json$/,
+				loader: "json-loader",
+			}
 		],
 	},
 };
