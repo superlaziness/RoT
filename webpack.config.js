@@ -1,4 +1,10 @@
 const path = require("path");
+const webpack = require('webpack');
+
+const GLOBALS = {
+  __DEV__: true,
+  __BROWSER__: false,
+};
 
 module.exports = {
 	entry: ["server"],
@@ -29,6 +35,7 @@ module.exports = {
 						'babel-preset-stage-1',
 						'babel-preset-react',
 					].map(require.resolve),
+          plugins: ['babel-plugin-transform-decorators-legacy'].map(require.resolve),
 				},
 				exclude: /node_modules/,
 			},
@@ -38,4 +45,7 @@ module.exports = {
 			}
 		],
 	},
+  plugins: [
+    new webpack.DefinePlugin(GLOBALS),
+  ]
 };
