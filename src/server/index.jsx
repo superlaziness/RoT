@@ -2,8 +2,8 @@ import Express from "express";
 import React from "react";
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import path from "path";
-import Maco from "./maco";
-import Html from './html';
+import Maco from "components/maco";
+import Html from 'components/html';
 
 const app = new Express();
 

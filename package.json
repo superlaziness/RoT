@@ -33,6 +33,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "fs": "0.0.1-security",
+    "keypress": "^0.2.1",
     "net": "^1.0.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

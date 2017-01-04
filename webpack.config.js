@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-	entry: ["./server"],
+	entry: ["server"],
 	output: {
 		path: path.join(__dirname, "dist"),
 		filename: "server.js",
@@ -10,6 +10,7 @@ module.exports = {
 	target: "node",
 	resolve: {
 		moduleDirectories: ['node_modules'],
+    root: path.join(__dirname, "src"),
 		extensions: [
 			"",
 			".js",
