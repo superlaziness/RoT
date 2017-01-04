@@ -4,7 +4,7 @@
   "description": "React of Things",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config=webpack.server.config.js && webpack --config=webpack.client.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
+    "babel-polyfill": "6.20.0",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "keypress": "^0.2.1",

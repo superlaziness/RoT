@@ -24,10 +24,17 @@ const renderApp = () => {
 
 store.subscribe(renderApp);
 
-app.use("/static", Express.static(path.join(__dirname, "dist")));
+console.log(path.join(__dirname, ));
+
+app.use("/static", Express.static('./dist'));
+
 app.get("*", (req, res) => {
 	const markup = renderToStaticMarkup(
-		<Html children={children} />		
+		<Html 
+      children={children}
+      script='/static/client.js'
+      state={store.getState()}
+    />		
 	);
 
 	res.status(200).send(`<!doctype html>${markup}`);

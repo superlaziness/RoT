@@ -24,12 +24,6 @@ function Html({ script, style, children, state }) {
             data-initial-state={JSON.stringify(state)}
           />
         )}
-
-        <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '115784778919403');fbq('track', 'PageView');` }} />
-        <noscript>
-          <img alt="" height="1" width="1" src="https://www.facebook.com/tr?id=115784778919403&ev=PageView&noscript=1" />
-        </noscript>
-
       </body>
     </html>
   );
@@ -37,9 +31,9 @@ function Html({ script, style, children, state }) {
 
 Html.propTypes = {
  // style: PropTypes.string.isRequired,
- // script: PropTypes.string,
+   script: PropTypes.string,
   children: PropTypes.string,
- // state: PropTypes.object.isRequired,
+  state: PropTypes.object.isRequired,
 };
 
 export default Html;
