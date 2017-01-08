@@ -57,10 +57,17 @@ export default class Maco extends Component {
     console.log('rendered', this.props.test);
     return (
       <div>
-        <h1 onClick={this.handleClick}>{this.state.mode == "reading_data" ? "Режим чтения данных" : "Режим редактирования"}</h1>
+        <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>
         <h2>{this.props.test.encoder}</h2>
-        <button onClick={() => this.handleControls("+")}>+</button> {/* didn't understand why if i use this.handleControls("+") without arrow function something wierd going on */}
-        <button onClick={() => this.handleControls("-")}>-</button>
+        {
+          (this.state.mode === "editing_data")
+            ? <div>
+                <button onClick={() => this.handleControls("+")}>+</button> {/* didn't understand why if i use this.handleControls("+") without arrow function something wierd going on */}
+                <button onClick={() => this.handleControls("-")}>-</button><br/>
+                <span>Click the header to enter reading mode</span>
+              </div>
+            : <div>Click the header to enter editing mode</div>  
+        }
       </div>);
   }
 }

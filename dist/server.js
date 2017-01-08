@@ -48370,27 +48370,41 @@
 	        _react2.default.createElement(
 	          "h1",
 	          { onClick: this.handleClick },
-	          this.state.mode == "reading_data" ? "Режим чтения данных" : "Режим редактирования"
+	          this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"
 	        ),
 	        _react2.default.createElement(
 	          "h2",
 	          null,
 	          this.props.test.encoder
 	        ),
-	        _react2.default.createElement(
-	          "button",
-	          { onClick: function onClick() {
-	              return _this2.handleControls("+");
-	            } },
-	          "+"
-	        ),
-	        " ",
-	        _react2.default.createElement(
-	          "button",
-	          { onClick: function onClick() {
-	              return _this2.handleControls("-");
-	            } },
-	          "-"
+	        this.state.mode === "editing_data" ? _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "button",
+	            { onClick: function onClick() {
+	                return _this2.handleControls("+");
+	              } },
+	            "+"
+	          ),
+	          " ",
+	          _react2.default.createElement(
+	            "button",
+	            { onClick: function onClick() {
+	                return _this2.handleControls("-");
+	              } },
+	            "-"
+	          ),
+	          _react2.default.createElement("br", null),
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            "Click the header to enter reading mode"
+	          )
+	        ) : _react2.default.createElement(
+	          "div",
+	          null,
+	          "Click the header to enter editing mode"
 	        )
 	      );
 	    }
