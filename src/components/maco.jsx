@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions/testActions";
 import keypress from "keypress";
+import List from "components/list";
+
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
@@ -48,7 +50,7 @@ export default class Maco extends Component {
           this.props.decreaseEncoder();
           break;
         default:
-          throw "huynya";  //what is supposed to do in default, if calling it means error???
+          throw "huynya";  
       }
     }
   }
@@ -62,12 +64,13 @@ export default class Maco extends Component {
         {
           (this.state.mode === "editing_data")
             ? <div>
-                <button onClick={() => this.handleControls("+")}>+</button> {/* didn't understand why if i use this.handleControls("+") without arrow function something wierd going on */}
+                <button onClick={() => this.handleControls("+")}>+</button> 
                 <button onClick={() => this.handleControls("-")}>-</button><br/>
                 <span>Click the header to enter reading mode</span>
               </div>
             : <div>Click the header to enter editing mode</div>  
         }
+        <List/>      
       </div>);
   }
 }
