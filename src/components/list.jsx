@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ListItem from "components/listitem";
+import Form from "components/form";
 
 export default class List extends Component {
   constructor(props) {
@@ -9,12 +10,11 @@ export default class List extends Component {
     };
   }
 
-  addItem = (e) => {
-    console.log(this.refs);
-    e.preventDefault();
-
+  addItem = (inputs) => {
     let listArray = this.state.list; 
-    listArray.push(this.refs.input.value); // didn't understand why e.target.value isn't working
+    inputs.forEach((item, i, arr) => {
+      listArray.push(item.value);
+    });
     this.setState({list: listArray});    
   }
 
@@ -27,11 +27,7 @@ export default class List extends Component {
             ))}
           </ul>
           <br/>
-          <form onSubmit={this.addItem}>
-            <input placeholder="new item" ref="input">
-            </input>
-            <button type="submit">add</button>
-          </form>
+          <Form onSubmit={this.addItem} />
         </div>
       )
   }

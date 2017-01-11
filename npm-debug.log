@@ -1,0 +1,39 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/coilme/n/bin/node',
+1 verbose cli   '/home/coilme/n/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'build' ]
+2 info using npm@3.10.10
+3 info using node@v7.2.1
+4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+5 info lifecycle rot@0.0.1~prebuild: rot@0.0.1
+6 silly lifecycle rot@0.0.1~prebuild: no script for prebuild, continuing
+7 info lifecycle rot@0.0.1~build: rot@0.0.1
+8 verbose lifecycle rot@0.0.1~build: unsafe-perm in lifecycle true
+9 verbose lifecycle rot@0.0.1~build: PATH: /home/coilme/n/lib/node_modules/npm/bin/node-gyp-bin:/mnt/d/code/nodejs/hackaton/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/coilme/n/bin
+10 verbose lifecycle rot@0.0.1~build: CWD: /mnt/d/code/nodejs/hackaton
+11 silly lifecycle rot@0.0.1~build: Args: [ '-c',
+11 silly lifecycle   'webpack --config=webpack.server.config.js && webpack --config=webpack.client.config.js' ]
+12 verbose stack Error: spawn ENOMEM
+12 verbose stack     at exports._errnoException (util.js:1022:11)
+12 verbose stack     at ChildProcess.spawn (internal/child_process.js:313:11)
+12 verbose stack     at exports.spawn (child_process.js:387:9)
+12 verbose stack     at spawn (/home/coilme/n/lib/node_modules/npm/lib/utils/spawn.js:21:13)
+12 verbose stack     at runCmd_ (/home/coilme/n/lib/node_modules/npm/lib/utils/lifecycle.js:247:14)
+12 verbose stack     at runCmd (/home/coilme/n/lib/node_modules/npm/lib/utils/lifecycle.js:208:5)
+12 verbose stack     at runPackageLifecycle (/home/coilme/n/lib/node_modules/npm/lib/utils/lifecycle.js:174:3)
+12 verbose stack     at Array.<anonymous> (/home/coilme/n/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+12 verbose stack     at LOOP (/home/coilme/n/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+12 verbose stack     at chain (/home/coilme/n/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+13 verbose cwd /mnt/d/code/nodejs/hackaton
+14 error Linux 3.4.0+
+15 error argv "/home/coilme/n/bin/node" "/home/coilme/n/bin/npm" "run" "build"
+16 error node v7.2.1
+17 error npm  v3.10.10
+18 error code ENOMEM
+19 error errno ENOMEM
+20 error syscall spawn
+21 error spawn ENOMEM
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

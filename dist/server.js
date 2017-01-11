@@ -77,7 +77,7 @@
 
 	var _maco2 = _interopRequireDefault(_maco);
 
-	var _html = __webpack_require__(307);
+	var _html = __webpack_require__(308);
 
 	var _html2 = _interopRequireDefault(_html);
 
@@ -48878,6 +48878,10 @@
 
 	var _listitem2 = _interopRequireDefault(_listitem);
 
+	var _form = __webpack_require__(307);
+
+	var _form2 = _interopRequireDefault(_form);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48894,12 +48898,11 @@
 
 	    var _this = _possibleConstructorReturn(this, (List.__proto__ || Object.getPrototypeOf(List)).call(this, props));
 
-	    _this.addItem = function (e) {
-	      console.log(_this.refs);
-	      e.preventDefault();
-
+	    _this.addItem = function (inputs) {
 	      var listArray = _this.state.list;
-	      listArray.push(_this.refs.input.value);
+	      inputs.forEach(function (item, i, arr) {
+	        listArray.push(item.value);
+	      });
 	      _this.setState({ list: listArray });
 	    };
 
@@ -48923,16 +48926,7 @@
 	          })
 	        ),
 	        _react2.default.createElement("br", null),
-	        _react2.default.createElement(
-	          "form",
-	          { onSubmit: this.addItem },
-	          _react2.default.createElement("input", { placeholder: "new item", ref: "input" }),
-	          _react2.default.createElement(
-	            "button",
-	            { type: "submit" },
-	            "add"
-	          )
-	        )
+	        _react2.default.createElement(_form2.default, { addItem: this.addItem })
 	      );
 	    }
 	  }]);
@@ -48998,6 +48992,93 @@
 /* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(91);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Form = function (_Component) {
+	  _inherits(Form, _Component);
+
+	  function Form(props) {
+	    _classCallCheck(this, Form);
+
+	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
+
+	    _this.state = {
+	      inputs: [{
+	        name: "add",
+	        placeholder: "add item",
+	        value: ""
+	      }]
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Form, [{
+	    key: "handleSubmit",
+	    value: function handleSubmit(event) {
+	      event.preventDefault();
+	      this.props.onSubmit(this.state.inputs);
+	    }
+	  }, {
+	    key: "handleChange",
+	    value: function handleChange(event) {
+	      console.log(event.target.value);
+	      var inputs = this.state.inputs;
+	      inputs.forEach(function (input, i, arr) {
+	        if (input.name === event.target.name) {
+	          input.value = event.targe.value;
+	        };
+	      });
+	      console.log(inputs);
+	      this.setState({ inputs: inputs });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _this2 = this;
+
+	      return _react2.default.createElement(
+	        "form",
+	        { onSubmit: this.handleSubmit },
+	        this.state.inputs.map(function (input, index) {
+	          return _react2.default.createElement("input", { key: index, name: input.name, value: input.value, onChange: _this2.handleChange });
+	        }),
+	        _react2.default.createElement(
+	          "button",
+	          { type: "submit" },
+	          "add"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Form;
+	}(_react.Component);
+
+	exports.default = Form;
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -49008,7 +49089,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactHelmet = __webpack_require__(308);
+	var _reactHelmet = __webpack_require__(309);
 
 	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
 
@@ -49058,7 +49139,7 @@
 	exports.default = Html;
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports.__esModule = true;
@@ -49071,11 +49152,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactSideEffect = __webpack_require__(309);
+	var _reactSideEffect = __webpack_require__(310);
 
 	var _reactSideEffect2 = _interopRequireDefault(_reactSideEffect);
 
-	var _deepEqual = __webpack_require__(312);
+	var _deepEqual = __webpack_require__(313);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
@@ -49083,9 +49164,9 @@
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-	var _HelmetConstants = __webpack_require__(315);
+	var _HelmetConstants = __webpack_require__(316);
 
-	var _PlainComponent = __webpack_require__(316);
+	var _PlainComponent = __webpack_require__(317);
 
 	var _PlainComponent2 = _interopRequireDefault(_PlainComponent);
 
@@ -49633,7 +49714,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -49650,11 +49731,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _fbjsLibExecutionEnvironment = __webpack_require__(310);
+	var _fbjsLibExecutionEnvironment = __webpack_require__(311);
 
 	var _fbjsLibExecutionEnvironment2 = _interopRequireDefault(_fbjsLibExecutionEnvironment);
 
-	var _fbjsLibShallowEqual = __webpack_require__(311);
+	var _fbjsLibShallowEqual = __webpack_require__(312);
 
 	var _fbjsLibShallowEqual2 = _interopRequireDefault(_fbjsLibShallowEqual);
 
@@ -49762,7 +49843,7 @@
 	};
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports) {
 
 	/**
@@ -49803,7 +49884,7 @@
 	module.exports = ExecutionEnvironment;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports) {
 
 	/**
@@ -49858,12 +49939,12 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(313);
-	var isArguments = __webpack_require__(314);
+	var objectKeys = __webpack_require__(314);
+	var isArguments = __webpack_require__(315);
 
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -49958,7 +50039,7 @@
 
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -49973,7 +50054,7 @@
 
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -49999,7 +50080,7 @@
 
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports) {
 
 	exports.__esModule = true;
@@ -50035,7 +50116,7 @@
 	};
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports.__esModule = true;
