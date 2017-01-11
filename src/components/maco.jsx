@@ -1,37 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions/testActions";
-import keypress from "keypress";
+//import keypress from "keypress";
 import List from "components/list";
-
+import keyboardPress from "components/keyboardpress";
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
   constructor(props) {
     super(props);
-    console.log("props", props);
-    if (!__BROWSER__) {
-      if (!global.listeningKeypress) {
-        keypress(process.stdin);
-        process.stdin.on('keypress', function (ch, key) {
-          console.log('got "keypress"', key);
-          if (key && key.ctrl &&  key.name == 'w') {
-            props.increaseEncoder();
-            console.log('increased');
-          };
-          if (key && key.ctrl && key.name == 'q') {
-            props.decreaseEncoder();
-            console.log("decreased");
-          };
-          if (key && key.ctrl && key.name == 'c') {
-            process.exit();
-          };
-        });
-        process.stdin.setRawMode(true);
-        process.stdin.resume();
-      }
-      global.listeningKeypress = true;
-    }
+    keyboardPress(props);
     this.state = {mode: "reading_data"};
   }
 
