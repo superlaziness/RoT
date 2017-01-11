@@ -48900,9 +48900,7 @@
 
 	    _this.addItem = function (inputs) {
 	      var listArray = _this.state.list;
-	      inputs.forEach(function (item, i, arr) {
-	        listArray.push(item.value);
-	      });
+	      listArray.push(inputs.add.value);
 	      _this.setState({ list: listArray });
 	    };
 
@@ -48926,7 +48924,7 @@
 	          })
 	        ),
 	        _react2.default.createElement("br", null),
-	        _react2.default.createElement(_form2.default, { addItem: this.addItem })
+	        _react2.default.createElement(_form2.default, { onSubmit: this.addItem })
 	      );
 	    }
 	  }]);
@@ -49021,36 +49019,33 @@
 
 	    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
+	    _this.handleSubmit = function (event) {
+	      event.preventDefault();
+	      _this.props.onSubmit(_this.state.inputs);
+	    };
+
+	    _this.handleChange = function (event) {
+	      console.log(event.target.value);
+	      var inputs = _this.state.inputs;
+	      var name = event.target.name;
+	      console.log(name);
+	      inputs[name].value = event.target.value;
+	      console.log(inputs);
+	      _this.setState({ inputs: inputs });
+	    };
+
 	    _this.state = {
-	      inputs: [{
-	        name: "add",
-	        placeholder: "add item",
-	        value: ""
-	      }]
+	      inputs: {
+	        add: {
+	          placeholder: "add item",
+	          value: ""
+	        }
+	      }
 	    };
 	    return _this;
 	  }
 
 	  _createClass(Form, [{
-	    key: "handleSubmit",
-	    value: function handleSubmit(event) {
-	      event.preventDefault();
-	      this.props.onSubmit(this.state.inputs);
-	    }
-	  }, {
-	    key: "handleChange",
-	    value: function handleChange(event) {
-	      console.log(event.target.value);
-	      var inputs = this.state.inputs;
-	      inputs.forEach(function (input, i, arr) {
-	        if (input.name === event.target.name) {
-	          input.value = event.targe.value;
-	        };
-	      });
-	      console.log(inputs);
-	      this.setState({ inputs: inputs });
-	    }
-	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _this2 = this;
@@ -49058,8 +49053,8 @@
 	      return _react2.default.createElement(
 	        "form",
 	        { onSubmit: this.handleSubmit },
-	        this.state.inputs.map(function (input, index) {
-	          return _react2.default.createElement("input", { key: index, name: input.name, value: input.value, onChange: _this2.handleChange });
+	        Object.keys(this.state.inputs).map(function (key, index) {
+	          return _react2.default.createElement("input", { key: index, name: key, value: key.value, onChange: _this2.handleChange });
 	        }),
 	        _react2.default.createElement(
 	          "button",

@@ -4,29 +4,26 @@ export default class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputs: [
-        {
-          name: "add",
+      inputs: {
+        add: {
           placeholder: "add item",
           value: ""
-        },
-      ],      
+        },      
+      },      
     };
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state.inputs);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     console.log(event.target.value);
     let inputs = this.state.inputs;
-    inputs.forEach((input, i, arr) => {
-      if(input.name === event.target.name) {
-        input.value = event.targe.value;
-      };
-    });
+    let name = event.target.name;
+    console.log(name);
+    inputs[name].value = event.target.value;
     console.log(inputs);
     this.setState({inputs: inputs});
   }
@@ -34,8 +31,8 @@ export default class Form extends Component {
   render() {
     return(
           <form onSubmit={this.handleSubmit}>
-            {this.state.inputs.map((input, index) => (
-              <input key={index} name={input.name}  value={input.value} onChange={this.handleChange}/>
+            {Object.keys(this.state.inputs).map((key, index) => (
+              <input key={index} name={key}  value={key.value} onChange={this.handleChange}/>
             ))}
             <button type="submit">add</button>
           </form>

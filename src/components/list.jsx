@@ -12,9 +12,7 @@ export default class List extends Component {
 
   addItem = (inputs) => {
     let listArray = this.state.list; 
-    inputs.forEach((item, i, arr) => {
-      listArray.push(item.value);
-    });
+    listArray.push(inputs.add.value);
     this.setState({list: listArray});    
   }
 
