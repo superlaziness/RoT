@@ -4,6 +4,7 @@ import * as actions from "actions/testActions";
 //import keypress from "keypress";
 import List from "components/list";
 import keyboardPress from "components/keyboardpress";
+import ProgressBar from "components/progressbar";
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
@@ -48,7 +49,8 @@ export default class Maco extends Component {
               </div>
             : <div>Click the header to enter editing mode</div>  
         }
-        <List/>      
+        <List/>    
+        <ProgressBar value={12}/>  
       </div>);
   }
 }
