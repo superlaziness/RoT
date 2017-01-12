@@ -6,8 +6,22 @@ export default class ProgressBar extends Component {
   }
 
   render() {
-    const containerStyle = {marginTop: '100px', marginLeft: 'auto', marginRight: 'auto', width: '600px', position: 'relative',backgroundColor:'orange', color: 'blue'};  
-    let innerDivStyle = {position: 'absolute', top: 0, bottom: 0, left: 0, backgroundColor:'red', color: 'green', width: (600/100*this.props.value)};
+    const containerStyle = {marginTop: '100px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      width: '600px',
+      height: '100px',
+      position: 'relative',
+      backgroundColor:'#F0F8FF'
+    };  
+    let innerDivStyle = {position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      backgroundColor:'#7FFFD4',
+      width: (600/100*this.props.value)
+    };
+    
     return(
         <div style={containerStyle}>
           <div style={innerDivStyle}>
