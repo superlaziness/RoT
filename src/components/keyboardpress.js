@@ -3,6 +3,7 @@ import keypress from "keypress";
 export default function keyboardPress(props) {
   if (!__BROWSER__) {
     if (!global.listeningKeypress) {
+
       keypress(process.stdin);
       process.stdin.on('keypress', function (ch, key) {
         console.log('got "keypress"', key);
@@ -14,13 +15,13 @@ export default function keyboardPress(props) {
           props.decreaseEncoder();
           console.log("decreased");
         };
-        if (key && key.ctrl && key.name == 'c') {
-          process.exit();
-        };
+        // if (key && key.ctrl && key.name == 'c') {
+        //   process.exit();
+        // };
       });
-      process.stdin.setRawMode(true);
-      process.stdin.resume();
     }
     global.listeningKeypress = true;
+    //process.stdin.setRawMode(true);
+    //process.stdin.resume();
   }
 };
