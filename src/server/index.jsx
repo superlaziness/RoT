@@ -30,7 +30,7 @@ app.get("*", (req, res) => {
 	const markup = renderToStaticMarkup(
 		<Html 
       children={children}
-      script='/static/client.js'
+      script='http://127.0.0.1:8080/dist/client.js'
       state={store.getState()}
     />		
 	);

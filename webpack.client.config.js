@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: "client.js",
-    publicPath: "/static/",
+    publicPath: "http://localhost:8080/dist/",
   },
   resolve: {
     moduleDirectories: ['node_modules'],
@@ -27,17 +27,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loaders: ['react-hot', {
-          loader: 'babel-loader',
-          query: {
-            presets: [
-              'babel-preset-es2015',
-              'babel-preset-stage-1',
-              'babel-preset-react',
-            ].map(require.resolve),
-            plugins: ['babel-plugin-transform-decorators-legacy'].map(require.resolve),
-          }
-        }],
+        loaders: ['react-hot-loader', 'babel-loader'],
         exclude: /node_modules/,
       },
       {
