@@ -34,7 +34,6 @@ export default class Maco extends Component {
     }
   }
    
-   
   render() {
     console.log('rendered', this.props.test);
     return (
