@@ -49134,8 +49134,22 @@
 	  _createClass(ProgressBar, [{
 	    key: 'render',
 	    value: function render() {
-	      var containerStyle = { marginTop: '100px', marginLeft: 'auto', marginRight: 'auto', width: '600px', position: 'relative', backgroundColor: 'orange', color: 'blue' };
-	      var innerDivStyle = { position: 'absolute', top: 0, bottom: 0, left: 0, backgroundColor: 'red', color: 'green', width: 600 / 100 * this.props.value };
+	      var containerStyle = { marginTop: '100px',
+	        marginLeft: 'auto',
+	        marginRight: 'auto',
+	        width: '600px',
+	        height: '100px',
+	        position: 'relative',
+	        backgroundColor: '#F0F8FF'
+	      };
+	      var innerDivStyle = { position: 'absolute',
+	        top: 0,
+	        bottom: 0,
+	        left: 0,
+	        backgroundColor: '#7FFFD4',
+	        width: 600 / 100 * this.props.value
+	      };
+
 	      return _react2.default.createElement(
 	        'div',
 	        { style: containerStyle },
