@@ -50,7 +50,7 @@ export default class Maco extends Component {
             : <div>Click the header to enter editing mode</div>  
         }
         <List/>    
-        <ProgressBar value={12}/>  
+        <ProgressBar value={this.props.test.encoder}/>  
       </div>);
   }
 }
