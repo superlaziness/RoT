@@ -24,8 +24,6 @@ const renderApp = () => {
 
 store.subscribe(renderApp);
 
-console.log(path.join(__dirname, ));
-
 app.use("/static", Express.static('./dist'));
 
 app.get("*", (req, res) => {
