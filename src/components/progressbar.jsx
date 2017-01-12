@@ -18,10 +18,14 @@ export default class ProgressBar extends Component {
       top: 0,
       bottom: 0,
       left: 0,
-      backgroundColor:'#7FFFD4',
-      width: (600/100*this.props.value)
+      backgroundColor:'#F0F8FF',
+      width: (600/100*Math.abs(this.props.value))
     };
-    
+
+    this.props.value >= 0 
+      ? innerDivStyle.backgroundColor = '#7FFFD4'
+      : innerDivStyle.backgroundColor = '#DC143C';
+
     return(
         <div style={containerStyle}>
           <div style={innerDivStyle}>
