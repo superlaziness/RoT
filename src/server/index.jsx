@@ -39,4 +39,5 @@ app.get("*", (req, res) => {
 });
 
 renderApp();
+
 app.listen(10000, () => {console.log("server is running!")});

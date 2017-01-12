@@ -33,9 +33,9 @@ export default class Maco extends Component {
       }
     }
   }
-   
+
   render() {
-    console.log('rendered', this.props.test);
+    //console.log('rendered', this.props.test);
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>

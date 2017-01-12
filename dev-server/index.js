@@ -14,7 +14,6 @@ serverCompiler.watch(
     poll: true,
   }, 
   (err, stats) => {
-    //console.log(stats);
     if (serverProcess) serverProcess.kill();
     serverProcess = spawn('node',[path.join(__dirname,'..','dist/server.js')]);
     serverProcess.stdin.setEncoding('utf-8');

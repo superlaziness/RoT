@@ -1,10 +1,20 @@
 const path = require("path");
 const webpack = require('webpack');
+const fs = require('fs');
 
 const GLOBALS = {
   __DEV__: true,
   __BROWSER__: false,
 };
+
+const nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
 
 module.exports = {
 	entry: ["server"],
@@ -25,6 +35,7 @@ module.exports = {
 		],
 	},
 	module: {
+		noParse: ['ws'],
 		loaders: [
 			{
 				test: /\.(js|jsx)$/,
@@ -45,6 +56,13 @@ module.exports = {
 			}
 		],
 	},
+	node: {
+    console: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
+  externals: nodeModules,
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
   ]

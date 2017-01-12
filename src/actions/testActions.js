@@ -1,7 +1,7 @@
 export function increaseEncoder() {
-  return {type: "increase"};
+  return {type: "increase", socket: true};
 };
 
 export function decreaseEncoder() {
-  return {type: "decrease"};
+  return {type: "decrease", socket: true};
 }

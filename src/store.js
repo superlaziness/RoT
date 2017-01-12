@@ -1,8 +1,13 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "reducers";
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from 'reducers';
+import socketIOMiddleware from 'middlewares/socket-io-middleware';
 
-const middlewares = [];
-const configureStore = (initialState) => {
+
+const configureStore = (initialState, isServer) => {
+  
+  const socketMW = socketIOMiddleware(isServer);
+  const middlewares = [socketMW];
+
   let enhancer;
   if (__DEV__) {
     let devToolsExtension = f => f;
