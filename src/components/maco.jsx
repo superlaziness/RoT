@@ -9,12 +9,12 @@ import ProgressBar from "components/progressbar";
 export default class Maco extends Component {
   constructor(props) {
     super(props);
+    
     if (!__BROWSER__) {
-      const keyboardPress = require('components/keyboardpress.js');
-      keyboardPress(props);
-      const encoder = require('components/encoder.js');
-      encoder(props.setValue);
-    }
+      require('components/keyboardpress.js').default(props);
+      require('components/encoder.js').default(props.setValue);
+    };
+
     this.state = {mode: "reading_data"};
   }
 
