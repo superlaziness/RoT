@@ -73,6 +73,8 @@ class Encoder extends EventEmitter {
       changed = true;
     };
 
+    console.log('encoder', this.value);
+
     if (changed) this.emit('change', this.value);
   }
 };
