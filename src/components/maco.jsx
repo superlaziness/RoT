@@ -4,6 +4,7 @@ import * as actions from "actions/testActions";
 //import keypress from "keypress";
 import List from "components/list";
 import keyboardPress from "components/keyboardpress";
+import encoder from 'components/encoder';
 import ProgressBar from "components/progressbar";
 
 @connect(state => ({ test: state.testReducer }), actions)
@@ -11,6 +12,7 @@ export default class Maco extends Component {
   constructor(props) {
     super(props);
     keyboardPress(props);
+    encoder(props.setValue);
     this.state = {mode: "reading_data"};
   }
 
@@ -34,6 +36,10 @@ export default class Maco extends Component {
     }
   }
 
+  handleReset = () => {
+    this.props.setValue(0);
+  }
+
   render() {
     //console.log('rendered', this.props.test);
     return (
@@ -45,6 +51,7 @@ export default class Maco extends Component {
             ? <div>
                 <button onClick={() => this.handleControls("+")}>+</button> 
                 <button onClick={() => this.handleControls("-")}>-</button><br/>
+                <button onClick={this.handleReset}>reset</button><br/>
                 <span>Click the header to enter reading mode</span>
               </div>
             : <div>Click the header to enter editing mode</div>  

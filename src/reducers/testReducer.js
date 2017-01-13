@@ -9,6 +9,8 @@ export default function testReducer(state = defaultState, action) {
       return { ...state, encoder: state.encoder + 1 };
     case 'decrease':
       return { ...state, encoder: state.encoder - 1 };
+    case 'setValue':
+      return { ...state, encoder: action.value };
     default:
       return state;
   }

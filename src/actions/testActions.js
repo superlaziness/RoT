@@ -5,3 +5,7 @@ export function increaseEncoder() {
 export function decreaseEncoder() {
   return {type: "decrease", socket: true};
 }
+
+export function setValue(value) {
+  return {type: "setValue", socket: true, value };
+}
