@@ -4,7 +4,6 @@ import * as actions from "actions/testActions";
 //import keypress from "keypress";
 import List from "components/list";
 import ProgressBar from "components/progressbar";
-import raspiRequire from "utils/raspi-require";
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
