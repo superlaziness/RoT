@@ -3,16 +3,14 @@ import { connect } from "react-redux";
 import * as actions from "actions/testActions";
 //import keypress from "keypress";
 import List from "components/list";
-import keyboardPress from "components/keyboardpress";
-import encoder from 'components/encoder';
 import ProgressBar from "components/progressbar";
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
   constructor(props) {
     super(props);
-    keyboardPress(props);
-    encoder(props.setValue);
+    if (!__BROWSER__) require('components/keyboardpress')(props);
+    if (!__BROWSER__) require('components/encoder')(props.setValue);
     this.state = {mode: "reading_data"};
   }
 
