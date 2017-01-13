@@ -17,7 +17,7 @@ const socketIOMiddleware = () => {
       });
     });
   } else {
-    socketClient = require('socket.io-client')('http://localhost:2002');
+    socketClient = require('socket.io-client')(':2002');
     socketClient.on('socket action', data => {
       if (!socketDispatch) return;
       socketDispatch(data);
