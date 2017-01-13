@@ -11,7 +11,7 @@ export default class Maco extends Component {
     super(props);
     if (!__BROWSER__) {
       const keyboardPress = require('components/keyboardpress.js');
-      keyboardpress(props);
+      keyboardPress(props);
       const encoder = require('components/encoder.js');
       encoder(props.setValue);
     }
