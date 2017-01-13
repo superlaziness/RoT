@@ -4,15 +4,16 @@ import * as actions from "actions/testActions";
 //import keypress from "keypress";
 import List from "components/list";
 import ProgressBar from "components/progressbar";
+import raspiRequire from "utils/raspi-require";
 
 @connect(state => ({ test: state.testReducer }), actions)
 export default class Maco extends Component {
   constructor(props) {
     super(props);
-    
+
     if (!__BROWSER__) {
-      require('components/keyboardpress.js').default(props);
-      require('components/encoder.js').default(props.setValue);
+      const keypress = raspiRequire('components/keyboardpress.js') && keypress.default(props);
+      const encoder = raspiRequire('components/encoder.js') && encoder.default(props.setValue);
     };
 
     this.state = {mode: "reading_data"};

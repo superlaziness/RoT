@@ -7,6 +7,7 @@ const serverConfig = require('../webpack.server.config');
 
 //Start server with webpack watcher / Restart server process when it recompiles
 const serverCompiler = webpack(serverConfig);
+
 const options = {
   env: process.env,
 };
