@@ -15,13 +15,23 @@ export default function keyboardPress(props) {
           props.decreaseEncoder();
           console.log("decreased");
         };
-        // if (key && key.ctrl && key.name == 'c') {
-        //   process.exit();
-        // };
+
+        //HACK cause of development process running specific
+        if (process.env.NODE_ENV === 'production') {
+          if (key && key.ctrl && key.name == 'c') {
+            process.exit();
+          };
+        };
+        //---
       });
     }
     global.listeningKeypress = true;
-    //process.stdin.setRawMode(true);
-    //process.stdin.resume();
+
+    //HACK cause of development process running specific
+    if (process.env.NODE_ENV === 'production') {
+      process.stdin.setRawMode(true);
+      process.stdin.resume();
+    };
+    //---
   }
 };

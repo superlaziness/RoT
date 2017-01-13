@@ -22,6 +22,9 @@ const renderApp = () => {
   );
 };
 
+const isDev = process.env.NODE_ENV === 'development';
+const scriptUrl = isDev ? 'http://localhost:8080/dist/client.js' : '/static/client.js';
+
 store.subscribe(renderApp);
 
 app.use("/static", Express.static('./dist'));
@@ -30,7 +33,7 @@ app.get("*", (req, res) => {
 	const markup = renderToStaticMarkup(
 		<Html 
       children={children}
-      script='http://127.0.0.1:8080/dist/client.js'
+      script={scriptUrl}
       state={store.getState()}
     />		
 	);

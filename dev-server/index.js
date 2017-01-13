@@ -7,6 +7,10 @@ const serverConfig = require('../webpack.server.config');
 
 //Start server with webpack watcher / Restart server process when it recompiles
 const serverCompiler = webpack(serverConfig);
+const options = {
+  env: process.env,
+};
+
 let serverProcess;
 serverCompiler.watch(
   {
@@ -15,7 +19,7 @@ serverCompiler.watch(
   }, 
   (err, stats) => {
     if (serverProcess) serverProcess.kill();
-    serverProcess = spawn('node',[path.join(__dirname,'..','dist/server.js')]);
+    serverProcess = spawn('node',[path.join(__dirname,'..','dist/server.js')], options);
     serverProcess.stdin.setEncoding('utf-8');
     serverProcess.stdout.pipe(process.stdout);
     serverProcess.stderr.pipe(process.stderr);
@@ -40,6 +44,6 @@ serverCompiler.watch(
 );
 
 //Start client (webpack-dev-server)
-const clientProcess = spawn('npm',['run','client-dev']);
+const clientProcess = spawn('npm',['run','client-dev'], options);
 clientProcess.stdout.pipe(process.stdout);
 clientProcess.stderr.pipe(process.stderr);
