@@ -12,8 +12,8 @@ export default class Maco extends Component {
     super(props);
 
     if (!__BROWSER__) {
-      const keypress = raspiRequire('components/keyboardpress.js') && keypress.default(props);
-      const encoder = raspiRequire('components/encoder.js') && encoder.default(props.setValue);
+      const keypress = raspiRequire('../components/keyboardpress.js') && keypress.default(props);
+      const encoder = raspiRequire('../components/encoder.js') && encoder.default(props.setValue);
     };
 
     this.state = {mode: "reading_data"};
