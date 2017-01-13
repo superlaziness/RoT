@@ -1,4 +1,4 @@
-const socketIOMiddleware = isServer => {
+const socketIOMiddleware = () => {
   let socketDispatch;
   let socketClient;
   let socketServer;
@@ -7,13 +7,13 @@ const socketIOMiddleware = isServer => {
   if (!__BROWSER__) {
     io = require('socket.io')(2002);
     io.on('connection', socket => {
-      console.log('connected client');
+      //console.log('connected client');
       socketServer = socket;
       socket.on('socket action', data => {
         if (!socketDispatch) return;
         socketDispatch(data);
         socket.broadcast.emit('socket action', data);
-        console.log('action recieved', data);
+        //console.log('action recieved', data);
       });
     });
   } else {
@@ -21,7 +21,7 @@ const socketIOMiddleware = isServer => {
     socketClient.on('socket action', data => {
       if (!socketDispatch) return;
       socketDispatch(data);
-      console.log('action recieved', data);
+      //console.log('action recieved', data);
     })
   };
   
@@ -32,7 +32,7 @@ const socketIOMiddleware = isServer => {
         const socket = io || socketClient;
         if (socket) {
           socket.emit('socket action', { ...action, recieved: true });
-          console.log('action emmited');
+          //console.log('action emmited');
         };
       };
       return next(action);
