@@ -1,12 +1,17 @@
-import React from "react";
-import RotComponent from 'components/rot';
+import React, { Component } from "react";
+import withRotProps from 'components/rot';
 
 import List from "components/list";
 import ProgressBar from "components/progressbar";
 
-export default class Maco extends RotComponent {
+import { connect } from "react-redux";
+import * as actions from "actions/testActions";
+
+class Maco extends Component {
   constructor(props) {
     super(props);
+
+    console.log('props', props);
 
     if (!__BROWSER__ && process.arch === 'arm') {
       require('components/keyboardpress.js').default(props);
@@ -26,10 +31,10 @@ export default class Maco extends RotComponent {
       const currentState = this.props.rotState.encoder;
       switch (sign) {
         case "+":
-          this.changeValue(currentState + 1);
+          this.props.setValue(currentState + 1);
           break;
         case "-":
-          this.changeValue(currentState - 1);
+          this.props.setValue(currentState - 1);
           break;
         default:
           throw "huynya";  
@@ -38,11 +43,11 @@ export default class Maco extends RotComponent {
   }
 
   handleReset = () => {
-    this.changeValue(0);
+    this.props.setValue(0);
   }
 
   render() {
-    //console.log('rendered', this.props.test);
+    console.log('rendered', this.props.rotState);
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>
@@ -62,3 +67,5 @@ export default class Maco extends RotComponent {
       </div>);
   }
 }
+
+export default withRotProps(Maco);
