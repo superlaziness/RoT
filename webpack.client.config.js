@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const GLOBALS = {
   __DEV__: true,
   __BROWSER__: true,
+  __NODE__: false,
+  __RASPI__: false,
 };
 
 module.exports = {

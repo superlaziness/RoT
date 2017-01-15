@@ -5,6 +5,8 @@ const fs = require('fs');
 const GLOBALS = {
   __DEV__: true,
   __BROWSER__: false,
+  __NODE__: true,
+  __RASPI__: process.arch === 'arm',
 };
 
 const nodeModules = {};
