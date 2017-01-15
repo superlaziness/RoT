@@ -4,7 +4,7 @@ import RotComponent from 'components/rot';
 import List from "components/list";
 import ProgressBar from "components/progressbar";
 
-export default class Maco extends Rot {
+export default class Maco extends RotComponent {
   constructor(props) {
     super(props);
 
