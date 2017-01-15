@@ -20,7 +20,7 @@ serverCompiler.watch(
   }, 
   (err, stats) => {
     if (serverProcess) serverProcess.kill();
-    serverProcess = spawn('node',[path.join(__dirname,'..','dist/server.js')], options);
+    serverProcess = spawn('node',[path.join(__dirname,'..','dist/server.js')], options, function(error) {console.log(error)});
     serverProcess.stdin.setEncoding('utf-8');
     serverProcess.stdout.pipe(process.stdout);
     serverProcess.stderr.pipe(process.stderr);

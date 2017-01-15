@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actions from "actions/testActions";
-//import keypress from "keypress";
+import React from "react";
+import RotComponent from 'components/rot';
+
 import List from "components/list";
 import ProgressBar from "components/progressbar";
 
-@connect(state => ({ test: state.testReducer }), actions)
-export default class Maco extends Component {
+export default class Maco extends Rot {
   constructor(props) {
     super(props);
 
@@ -25,12 +23,13 @@ export default class Maco extends Component {
 
   handleControls = (sign) => {
     if(this.state.mode === "editing_data") {
+      const currentState = this.props.rotState.encoder;
       switch (sign) {
         case "+":
-          this.props.increaseEncoder();
+          this.changeValue(currentState + 1);
           break;
         case "-":
-          this.props.decreaseEncoder();
+          this.changeValue(currentState - 1);
           break;
         default:
           throw "huynya";  
@@ -39,7 +38,7 @@ export default class Maco extends Component {
   }
 
   handleReset = () => {
-    this.props.setValue(0);
+    this.changeValue(0);
   }
 
   render() {
@@ -47,7 +46,7 @@ export default class Maco extends Component {
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>
-        <h2>{this.props.test.encoder}</h2>
+        <h2>{this.props.rotState.encoder}</h2>
         {
           (this.state.mode === "editing_data")
             ? <div>
@@ -59,7 +58,7 @@ export default class Maco extends Component {
             : <div>Click the header to enter editing mode</div>  
         }
         <List/>    
-        <ProgressBar value={this.props.test.encoder}/>  
+        <ProgressBar value={this.props.rotState.encoder}/>  
       </div>);
   }
 }
