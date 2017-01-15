@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import withRotProps from 'components/rot';
+import RoTHOC from 'components/hocs/rot';
+import raspiHOC from 'components/hocs/raspi';
+
+import path from 'path';
 
 import List from "components/list";
 import ProgressBar from "components/progressbar";
-
-import { connect } from "react-redux";
-import * as actions from "actions/testActions";
 
 class Maco extends Component {
   constructor(props) {
     super(props);
 
-    console.log('props', props);
-
-    if (!__BROWSER__ && process.arch === 'arm') {
-      require('components/keyboardpress.js').default(props);
-      require('components/encoder.js').default(props.setValue);
-    };
+    if (__NODE__) props.raspiListener(require('components/keyboardpress.js').default)(props);
+    if (__RASPI__) props.raspiListener(require('components/encoder.js').default)(props.setValue);
 
     this.state = {mode: "reading_data"};
   }
@@ -68,4 +64,4 @@ class Maco extends Component {
   }
 }
 
-export default withRotProps(Maco);
+export default raspiHOC(RoTHOC(Maco), 'encoder');

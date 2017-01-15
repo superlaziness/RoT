@@ -5,20 +5,15 @@ import { getPins } from 'raspi-board';
 
 const raspi = require('raspi');
 
-export default function encoder(action) {
-  if (!__BROWSER__) {
-    if (!global.listeningEncoder) {
-      raspi.init(() => {
-        global.listeningEncoder = true;
-        const encoder = new Encoder();
+function encoder(action) {
+  raspi.init(() => {
+    const encoder = new Encoder();
 
-        encoder.addListener('change', (val) => {
-          console.log('changed', val);
-          action(val);
-        });
-      });
-    }
-  }
+    encoder.addListener('change', (val) => {
+      console.log('changed', val);
+      action(val);
+    });
+  });
 };
 
 function resolveWiringPiToGPIO(wiringPiPin) {
@@ -78,5 +73,8 @@ class Encoder extends EventEmitter {
     if (changed) this.emit('change', this.value);
   }
 };
+
+if (process.arch === 'arm') module.exports(encoder);
+else module.exports(() => {console.log('not arm')});
 
 
