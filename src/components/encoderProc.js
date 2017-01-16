@@ -74,7 +74,5 @@ class Encoder extends EventEmitter {
   }
 };
 
-if (process.arch === 'arm') module.exports(encoder);
-else module.exports(() => {console.log('not arm')});
-
+export default encoder;
 
