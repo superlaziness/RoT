@@ -1,15 +1,11 @@
-import gpio from 'gpio';
+import rpio from 'rpio';
 
 const lastValue = 0;
 
 const led = (value) => {
   if (value !== lastValue) {
-    const gpio26 = gpio.export(26, { ready: () => {
-      gpio26.set(value, () => {
-        console.log('led changed', gpio26.value);
-        lastValue = value;
-      });
-    }});
+    rpio.open(37, rpio.OUTPUT, rpio.PULL_UP);
+    rpio.write(37, value ? rpio.HIGH : rpio.LOW);
   }
 }
 
