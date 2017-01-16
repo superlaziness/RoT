@@ -7,7 +7,7 @@ import * as actions from "actions/rotActions";
 const ConnectHOC = connect(state => ({ rotState: state.rotReducer }), actions);
 
 const RoTHOC = (WrappedComponent, options = {}) => {
-  const { group, name, data } = options;
+  const { name, data } = options;
 
   const RoTComponent = class extends Component {
 
@@ -15,26 +15,16 @@ const RoTHOC = (WrappedComponent, options = {}) => {
       super(props);
     }
 
-    setValue = (value, g = group, n = name, d = data) => {
-      console.log('set value', value, g, n, d);
-      if (g && n) this.props.changeValue(value, g, n, d);
+    setValue = (value, n = name, d = data) => {
+      if (n) this.props.setValueAction(value, n, d);
     }
 
-    getValue = (g = group, n = name) => {
-      if (!this.props.rotState) {
-        console.warn(`RoT error: no state`);
-        return 0
-      };
-      const { things } = this.props.rotState;
-      if (!things[g]) {
-        console.warn(`RoT error: group ${g} not presented in state`);
-        return 0
-      };
-      if (!things[g][n]) {
-        console.warn(`RoT error: thing ${n} not presented in group ${g}`);
-        return 0
-      };
-      return things[g][n].value
+    getValue = (n = name) => {
+      return this.props.getValueAction(n);
+    }
+
+    getData = (n = name) => {
+      return this.props.getDataAction(n);
     }
 
     render() {
@@ -43,7 +33,7 @@ const RoTHOC = (WrappedComponent, options = {}) => {
           {...this.props}
           setValue={this.setValue} 
           getValue={this.getValue}
-          group={group}
+          getData={this.getData}
           name={name}
           data={data}
         />

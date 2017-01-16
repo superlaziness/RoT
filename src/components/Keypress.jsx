@@ -3,7 +3,6 @@ import RoTHOC from 'components/hocs/rot';
 import raspiHOC from 'components/hocs/raspi';
 
 const sensorData = {
-  group: 'test',
   name: 'reqTemp',
   data: {
     description: 'Required temperature encoder',
