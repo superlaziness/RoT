@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import RoTHOC from 'components/hocs/rot';
-import raspiHOC from 'components/hocs/raspi';
 
 const sensorData = {
   name: 'reqTemp',
@@ -14,7 +13,7 @@ const sensorData = {
 class Encoder extends Component {
   constructor(props) {
     super(props);
-    if (__RASPI__) props.raspiListener(require('components/encoderProc.js').default)(props.setValue);
+    if (__RASPI__) props.once(require('components/encoderProc.js').default)(props.setValue);
   }
 
   render() {
@@ -22,4 +21,4 @@ class Encoder extends Component {
   }
 }
 
-export default raspiHOC(RoTHOC(Encoder, sensorData));
+export default RoTHOC(Encoder, sensorData);

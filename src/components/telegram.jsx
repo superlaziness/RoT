@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import raspiHOC from 'components/hocs/raspi';
+import RoTHOC from 'components/hocs/rot';
 
 class TelegramBot extends Component {
   constructor(props) {
     super(props);
-    if (__NODE__) props.raspiListener(require('components/telegrambot.js').default, 'telegramBot')(this.props.getValue);
+    if (__NODE__) props.once(require('components/telegrambot.js').default, 'telegramBot')(this.props.getValue);
   }
 
   render() {
@@ -12,4 +12,4 @@ class TelegramBot extends Component {
   }
 }
 
-export default raspiHOC(TelegramBot);
+export default RoTHOC(TelegramBot);

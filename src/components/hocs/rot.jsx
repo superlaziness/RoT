@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions/rotActions";
 
-
-
 const ConnectHOC = connect(state => ({ rotState: state.rotReducer }), actions);
+const onceObj = {};
 
 const RoTHOC = (WrappedComponent, options = {}) => {
   const { name, data } = options;
@@ -27,6 +26,13 @@ const RoTHOC = (WrappedComponent, options = {}) => {
       return this.props.getDataAction(n);
     }
 
+    once = (func, n = name) => {
+      if (!onceObj[n]) {
+        onceObj[n] = true;
+        return func;
+      } else return () => {};
+    }
+
     render() {
       return (
         <WrappedComponent
@@ -34,6 +40,7 @@ const RoTHOC = (WrappedComponent, options = {}) => {
           setValue={this.setValue} 
           getValue={this.getValue}
           getData={this.getData}
+          once={this.once}
           name={name}
           data={data}
         />
