@@ -11,13 +11,13 @@ import ProgressBar from "components/progressbar";
 import Encoder from 'components/Encoder';
 import Keypress from 'components/Keypress';
 import TelegramBot from 'components/telegram';
+import W1Temp from 'components/sensors/w1-temp';
 
 
 class Maco extends Component {
   constructor(props) {
     super(props);
     this.state = {mode: "reading_data"};
-    console.log('rendered', props.rotState);
   }
 
   handleClick = () => {
@@ -63,6 +63,7 @@ class Maco extends Component {
         <Encoder/>
         <Keypress onChange={this.handleControls}/>
         <TelegramBot getValue={this.props.getValue}/>
+        <W1Temp/>
       </div>);
   }
 };
