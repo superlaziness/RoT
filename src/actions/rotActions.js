@@ -10,6 +10,15 @@ export function setValueAction(value, name, data) {
   };
 };
 
+export function registerAction(name, data) {
+  return {
+    type: c.REGISTER,
+    socket: true,
+    name,
+    data,
+  }
+}
+
 export function getValueAction(name) {
   return (dispatch, getState) => {
     const device = getState().rotReducer.things[name];

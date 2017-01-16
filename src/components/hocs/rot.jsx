@@ -12,6 +12,11 @@ const RoTHOC = (WrappedComponent, options = {}) => {
 
     constructor(props) {
       super(props);
+      if (name && data) this.once(this.register, `${name}:register`)();
+    }
+
+    register = () => {
+      this.props.registerAction(name, data);
     }
 
     setValue = (value, n = name, d = data) => {

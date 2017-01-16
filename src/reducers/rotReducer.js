@@ -52,27 +52,20 @@ export default function rotReducer(state = defaultState, a) {
     case c.SET_VALUE:
       return { 
         ...state, 
-        things: updateObject(state.things, a.name, {value: a.value, data: a.data}),
+        things: updateObject(state.things, a.name, { value: a.value, data: a.data || state.things[a.name] && state.things[a.name].data }),
       };
 
-    case c.INCREASE_VALUE:
+    case c.REGISTER:
       return {
         ...state,
         things: updateObject(
-          state.things, 
-          a.name, 
-          { value: state.things[a.name] && state.things[a.name].value + 1 || 1, data: a.data }
-        )
-      };
-
-    case c.DECREASE_VALUE:
-      return {
-        ...state,
-        things: updateObject(
-          state.things, 
+          state.things,
           a.name,
-          { value: state.things[a.name] && state.things[a.name].value - 1 || -1, data: a.data }
-        )
+          {
+            value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0,
+            data: a.data,
+          }
+        ),
       };
 
     default:
