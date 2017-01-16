@@ -24,15 +24,13 @@ class Maco extends Component {
   }
 
   handleControls = (sign) => {
-    console.log('handle', sign);
-    const currentState = 0;
-    console.log('cur value', this.props.rotState);
+    const currentState = this.props.getValue('reqTemp');
     switch (sign) {
       case "+":
-        this.props.increaseValue('test', 'reqTemp');
+        this.props.setValue(currentState + 1, 'reqTemp');
         break;
       case "-":
-        this.props.decreaseValue('test', 'reqTemp');
+        this.props.setValue(currentState - 1, 'reqTemp');
         break;
       default:
         throw "huynya";  
@@ -40,7 +38,7 @@ class Maco extends Component {
   }
 
   handleReset = () => {
-    this.props.setValue(0, 'test', 'reqTemp');
+    this.props.setValue(0, 'reqTemp');
   }
 
   render() {
@@ -48,7 +46,7 @@ class Maco extends Component {
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>
-        <h2>{this.props.getValue('test', 'reqTemp')}</h2>
+        <h2>{this.props.getValue('reqTemp')}</h2>
         {
           (this.state.mode === "editing_data")
             ? <div>
@@ -60,7 +58,7 @@ class Maco extends Component {
             : <div>Click the header to enter editing mode</div>  
         }
         <List/>    
-        <ProgressBar value={this.props.getValue('test', 'reqTemp')}/>
+        <ProgressBar value={this.props.getValue('reqTemp')}/>
         <Encoder/>
         <Keypress onChange={this.handleControls}/>
       </div>);

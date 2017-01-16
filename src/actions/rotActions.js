@@ -1,32 +1,27 @@
 import * as c from '../constants';
 
-export function changeValue(value, group, name, data) {
+export function setValueAction(value, name, data) {
   return {
     type: c.SET_VALUE, 
     socket: true,
     value,
-    group,
     name,
     data,
   };
 };
 
-export function increaseValue(group, name, data) {
-  return {
-    type: c.INCREASE_VALUE, 
-    socket: true,
-    group,
-    name,
-    data,
-  };
-};
+export function getValueAction(name) {
+  return (dispatch, getState) => {
+    const device = getState().rotReducer.things[name];
+    if (device) return device.value;
+    else console.log(`error getting value of ${name} device`);
+  }
+}
 
-export function decreaseValue(group, name, data) {
-  return {
-    type: c.DECREASE_VALUE, 
-    socket: true,
-    group,
-    name,
-    data,
-  };
-};
+export function getDataAction(name) {
+  return (dispatch, getState) => {
+    const device = getState().rotReducer.things[name];
+    if (device) return device.data;
+    else console.log(`error getting data of ${name} device`);
+  }
+}
