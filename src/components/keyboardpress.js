@@ -1,15 +1,15 @@
 import keypress from "keypress";
 
-export default function keyboardPress(props) {
+export default function keyboardPress(callback) {
   keypress(process.stdin);
   process.stdin.on('keypress', function (ch, key) {
     console.log('got "keypress"', key);
     if (key && key.ctrl &&  key.name == 'w') {
-      props.increaseEncoder();
+      callback('+');
       console.log('increased');
     };
     if (key && key.ctrl && key.name == 'q') {
-      props.decreaseEncoder();
+      callback('-');
       console.log("decreased");
     };
 

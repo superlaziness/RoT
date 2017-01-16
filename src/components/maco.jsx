@@ -1,53 +1,53 @@
 import React, { Component } from "react";
 import RoTHOC from 'components/hocs/rot';
-import raspiHOC from 'components/hocs/raspi';
+
+import { connect } from "react-redux";
+import * as actions from "actions/rotActions";
 
 import path from 'path';
 
 import List from "components/list";
 import ProgressBar from "components/progressbar";
+import Encoder from 'components/Encoder';
+import Keypress from 'components/Keypress';
+
 
 class Maco extends Component {
   constructor(props) {
     super(props);
-
-    if (__NODE__) props.raspiListener(require('components/keyboardpress.js').default)(props);
-    if (__RASPI__) props.raspiListener(require('components/encoder.js').default)(props.setValue);
-
     this.state = {mode: "reading_data"};
   }
 
   handleClick = () => {
-    console.log(this.state.mode);
     this.state.mode === "reading_data" ? this.setState({mode: "editing_data"}) : this.setState({mode: "reading_data"});
   }
 
   handleControls = (sign) => {
-    if(this.state.mode === "editing_data") {
-      const currentState = this.props.rotState.encoder;
-      switch (sign) {
-        case "+":
-          this.props.setValue(currentState + 1);
-          break;
-        case "-":
-          this.props.setValue(currentState - 1);
-          break;
-        default:
-          throw "huynya";  
-      }
+    console.log('handle', sign);
+    const currentState = this.props.getValue('test', 'reqTemp') || 0;
+    console.log('cur value', this.props.rotState.things);
+    switch (sign) {
+      case "+":
+        this.props.setValue(currentState + 1, 'test', 'reqTemp');
+        break;
+      case "-":
+        this.props.setValue(currentState - 1, 'test', 'reqTemp');
+        break;
+      default:
+        throw "huynya";  
     }
   }
 
   handleReset = () => {
-    this.props.setValue(0);
+    this.props.setValue(0, 'test', 'reqTemp');
   }
 
   render() {
-    console.log('rendered', this.props.rotState);
+    console.log('rendered', this.props.rotState.things.test);
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>
-        <h2>{this.props.rotState.encoder}</h2>
+        <h2>{this.props.getValue('test', 'reqTemp')}</h2>
         {
           (this.state.mode === "editing_data")
             ? <div>
@@ -59,9 +59,13 @@ class Maco extends Component {
             : <div>Click the header to enter editing mode</div>  
         }
         <List/>    
-        <ProgressBar value={this.props.rotState.encoder}/>  
+        <ProgressBar value={this.props.getValue('test', 'reqTemp')}/>
+        <Encoder/>
+        <Keypress onChange={this.handleControls}/>
       </div>);
   }
-}
+};
 
-export default raspiHOC(RoTHOC(Maco), 'encoder');
+const ConnectHOC = connect(state => ({ rotState: state.rotReducer }), actions);
+
+export default RoTHOC(Maco);
