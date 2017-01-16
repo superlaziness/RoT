@@ -8,7 +8,7 @@ import path from 'path';
 
 import List from "components/list";
 import ProgressBar from "components/progressbar";
-import Encoder from 'components/Encoder';
+//import Encoder from 'components/Encoder';
 import Keypress from 'components/Keypress';
 import TelegramBot from 'components/telegram';
 import W1Temp from 'components/sensors/w1-temp';
@@ -60,7 +60,7 @@ class Maco extends Component {
         }
         <List/>    
         <ProgressBar value={this.props.getValue('reqTemp')}/>
-        <Encoder/>
+        {/*<Encoder/>*/}
         <Keypress onChange={this.handleControls}/>
         <TelegramBot getValue={this.props.getValue}/>
         <W1Temp/>
