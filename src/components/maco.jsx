@@ -5,7 +5,8 @@ import raspiHOC from 'components/hocs/raspi';
 import path from 'path';
 
 import List from "components/list";
-import ProgressBar from "components/progressbar";
+//import ProgressBar from "components/progressbar";
+import SimpleRegulatorViewer from 'components/simpleregulatorviewer'
 
 class Maco extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class Maco extends Component {
             : <div>Click the header to enter editing mode</div>  
         }
         <List/>    
-        <ProgressBar value={this.props.rotState.encoder}/>  
+        <SimpleRegulatorViewer threshold={this.props.rotState.encoder} sensor={5} output={1}/>  
       </div>);
   }
 }
