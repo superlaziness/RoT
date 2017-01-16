@@ -43,6 +43,7 @@
     "babel-polyfill": "6.20.0",
     "express": "^4.14.0",
     "keypress": "^0.2.1",
+    "node-telegram-bot-api": "^0.25.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-helmet": "3.3.0",
@@ -51,11 +52,10 @@
     "socket.io": "1.7.2",
     "socket.io-client": "1.7.2"
   },
-    "optionalDependencies": {
+  "optionalDependencies": {
     "raspi": "*",
     "raspi-gpio": "*",
     "raspi-board": "*",
     "onoff": "^1.1.1"
   }
-
 }
