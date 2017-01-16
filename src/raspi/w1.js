@@ -6,13 +6,15 @@ const w1 = (onChange, id) => {
   // sensor.list((err, listOfDeviceIds) => {
   //   console.log('1-wire sensors list', listOfDeviceIds);
   // });
-  sensor.get(id, (err, temp) => {
-    if (err) {
-      console.error(err);
-    } else {
-      onChange(temp);
-    }
-  });
+  setInterval(() => {
+    sensor.get(id, (err, temp) => {
+      if (err) {
+        console.error(err);
+      } else {
+        onChange(temp);
+      }
+    });
+  }, 10000);
 }
 
 export default w1;
