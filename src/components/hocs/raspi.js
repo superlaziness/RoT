@@ -10,9 +10,10 @@ const raspiHOC = WrappedComponent => {
     }
   }
 
-  const raspiListener = (func) => {
-    if (!raspiListeners['check']) {
-      raspiListeners['check'] = true;
+  const raspiListener = (func, name) => {
+    console.log('Listener', name);
+    if (!raspiListeners[name]) {
+      raspiListeners[name] = true;
       return func;
     } else return throwError(func);
   };

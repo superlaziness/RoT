@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import RoTHOC from 'components/hocs/rot';
 import raspiHOC from 'components/hocs/raspi';
 
-const sensorData = {
+const thingData = {
   name: 'reqTemp',
   data: {
     description: 'Required temperature encoder',
@@ -14,7 +14,7 @@ const sensorData = {
 class Keypress extends Component {
   constructor(props) {
     super(props);
-    if (__NODE__) props.raspiListener(require('components/keyboardpress.js').default)(this.props.onChange);
+    if (__NODE__) props.raspiListener(require('components/keyboardpress.js').default, 'keypress')(this.props.onChange);
   }
 
   render() {
@@ -22,4 +22,4 @@ class Keypress extends Component {
   }
 }
 
-export default RoTHOC(raspiHOC(Keypress), sensorData);
+export default RoTHOC(raspiHOC(Keypress), thingData);

@@ -10,6 +10,7 @@ import List from "components/list";
 import ProgressBar from "components/progressbar";
 import Encoder from 'components/Encoder';
 import Keypress from 'components/Keypress';
+import TelegramBot from 'components/telegram';
 
 
 class Maco extends Component {
@@ -61,6 +62,7 @@ class Maco extends Component {
         <ProgressBar value={this.props.getValue('reqTemp')}/>
         <Encoder/>
         <Keypress onChange={this.handleControls}/>
+        <TelegramBot getValue={this.props.getValue}/>
       </div>);
   }
 };
