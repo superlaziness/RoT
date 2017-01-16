@@ -16,6 +16,7 @@ class Maco extends Component {
   constructor(props) {
     super(props);
     this.state = {mode: "reading_data"};
+    console.log('rendered', props.rotState);
   }
 
   handleClick = () => {
@@ -24,14 +25,14 @@ class Maco extends Component {
 
   handleControls = (sign) => {
     console.log('handle', sign);
-    const currentState = this.props.getValue('test', 'reqTemp') || 0;
-    console.log('cur value', this.props.rotState.things);
+    const currentState = 0;
+    console.log('cur value', this.props.rotState);
     switch (sign) {
       case "+":
-        this.props.setValue(currentState + 1, 'test', 'reqTemp');
+        this.props.increaseValue('test', 'reqTemp');
         break;
       case "-":
-        this.props.setValue(currentState - 1, 'test', 'reqTemp');
+        this.props.decreaseValue('test', 'reqTemp');
         break;
       default:
         throw "huynya";  
@@ -43,7 +44,7 @@ class Maco extends Component {
   }
 
   render() {
-    console.log('rendered', this.props.rotState.things.test);
+    
     return (
       <div>
         <h1 onClick={this.handleClick}>{this.state.mode === "reading_data" ? "Reading mode" : "Editing mode"}</h1>

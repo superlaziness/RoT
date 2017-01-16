@@ -1,1 +1,3 @@
 export const SET_VALUE = 'SET_VALUE';
+export const INCREASE_VALUE = 'INCREASE_VALUE';
+export const DECREASE_VALUE = 'DECREASE_VALUE';
