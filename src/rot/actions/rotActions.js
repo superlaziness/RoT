@@ -27,6 +27,13 @@ export function getValueAction(name) {
   }
 }
 
+export function getCollectionAction(name) {
+  return (dispatch, getState) => {
+    const device = getState().rotReducer.things[name];
+    if (device) return device.collection || [];
+  }
+}
+
 export function getDataAction(name) {
   return (dispatch, getState) => {
     const device = getState().rotReducer.things[name];

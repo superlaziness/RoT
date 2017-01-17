@@ -16,12 +16,13 @@ class RoT extends Component {
     children: PropTypes.func,
     setValue: PropTypes.func.isRequired,
     getValue: PropTypes.func.isRequired,
+    getCollection: PropTypes.func.isRequired,
     getData: PropTypes.func.isRequired,
   };
 
   render() {
-    const { children, getValue, getData, name } = this.props;
-    return children && typeof children === 'function' && children(getValue(name), getData(name)) || null
+    const { children, getValue, getCollection, getData, name } = this.props;
+    return children && typeof children === 'function' && children(getValue(name), getCollection(name), getData(name)) || null
   }
 }
 

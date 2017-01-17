@@ -41,6 +41,10 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
       return this.props.getValueAction(n);
     }
 
+    getCollection = (n = this.name) => {
+      return this.props.getCollectionAction(n);
+    }
+
     getData = (n = this.name) => {
       return this.props.getDataAction(n);
     }
@@ -63,6 +67,7 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
           {...this.props}
           setValue={this.setValue} 
           getValue={this.getValue}
+          getCollection={this.getCollection}
           getData={this.getData}
           getList={this.getList}
           once={this.once}

@@ -41,6 +41,14 @@ const updateObject = (obj = {}, name, value) => {
   return { ...obj, ...updatedObject }
 };
 
+const updateCollection = (value, device) => {
+  if (!device.data || !device.data.collect) return false;
+  let collection = device.collection ? device.collection.slice() : [];
+  collection.push(value);
+  if (collection.length > device.data.collect) collection.splice(0, 1);
+  return collection;
+}
+
 const defaultState = {
   things: {},
   groups: {},
@@ -49,13 +57,23 @@ const defaultState = {
 
 export default function rotReducer(state = defaultState, a) {
   switch (a.type) {
-    case c.SET_VALUE:
+    case c.SET_VALUE: {
+      const data = a.data || state.things[a.name] && state.things[a.name].data;
       return { 
         ...state, 
-        things: updateObject(state.things, a.name, { value: a.value, data: a.data || state.things[a.name] && state.things[a.name].data }),
-      };
+        things: updateObject(
+          state.things, 
+          a.name, 
+          { 
+            value: a.value, 
+            data,
+            collection: updateCollection(a.value, state.things[a.name]) || [],
+          }
+        ),
+      }
+    }
 
-    case c.REGISTER:
+    case c.REGISTER: {
       return {
         ...state,
         things: updateObject(
@@ -66,7 +84,8 @@ export default function rotReducer(state = defaultState, a) {
             data: a.data,
           }
         ),
-      };
+      }
+    }
 
     default:
       return state;
