@@ -13,7 +13,7 @@ sensor.get('10-0008024f9ea9', function (err, tempObj) {
 
 var gpio = require("gpio");
 
-var gpio26 = gpio.export(26, { ready: function() {
+var gpio26 = gpio.export(19, { ready: function() {
   gpio26.set(function() {
     console.log(gpio26.value); 
   });

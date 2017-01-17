@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from 'reducers';
-import socketIOMiddleware from 'middlewares/socket-io-middleware';
+import { socketIOMiddleware, reducer } from 'rot';
 import thunk from 'redux-thunk';
 
 
@@ -21,7 +20,7 @@ const configureStore = (initialState) => {
 
   };
 
-  return createStore(rootReducer, initialState, enhancer);
+  return createStore(reducer, initialState, enhancer);
 }
 
 export default configureStore;

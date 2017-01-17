@@ -5,7 +5,6 @@ const bot_token = '329181543:AAE7wI9K8U-a2321XF_GY7RlTmXGNQbUTWY';
 export default function telegramBot(getValue) {
 
   const bot = new TelegramBot(bot_token, {polling: true});
-  console.log(bot);
 
   bot.on('message', (msg) => {
     const chatId = msg.chat.id;
