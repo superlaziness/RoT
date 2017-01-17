@@ -7,7 +7,7 @@ class TelegramBot extends Component {
   constructor(props) {
     super(props);
     if (__NODE__) props.once(require('rot/node/telegrambot.js').default, 'telegramBot')
-      (this.props.getValue, this.props.setValue);
+      (this.props.getValue, this.props.getList, this.props.setValue);
   };
 
   static propTypes = {
