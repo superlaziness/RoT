@@ -82,10 +82,13 @@ var PiStats = function(){
   };
 }();
 
-const stats = (onChangeCpu, onChangeMemory, interval = 1000) => {
+const stats = (onChange, interval = 1000) => {
   setInterval(() => {
-    PiStats.getCPUInfo(onChangeCpu);
-    PiStats.getMemoryInfo(onChangeMemory);
+    PiStats.getCPUInfo((CPUerr, CPUdata) => {
+      PiStats.getMemoryInfo((MEMerr, MEMdata) => {
+        onChange({cpu: CPUerr, memory: MEMerr}, {cpu: CPUdata, memory: MEMdata});
+      });
+    });
   }, interval)
 }
 
