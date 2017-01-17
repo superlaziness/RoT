@@ -19,26 +19,41 @@ export default function telegramBot(getValue, getList, setValue) {
     const helpMessage = '/get "[name]" - get value.\n/list - list of existing things.'; // /help command message
     const wtf = 'wtf?!';                               // not a command message
     const notExist = "this thing doesn't exist.";      // thing doesn't exist message
+    const errorMesage = "error";                       // error message
+
 
     const searchStore = function(thing) {
       return getValue(thing);
     }
 
     const sendValue = function(name) {
-      searchStore(name) 
-        ? bot.sendMessage(chatId, searchStore(name))
-        : bot.sendMessage(chatId, notExist);
+      console.log(searchStore(name));
+      if (searchStore(name) !== undefined) {
+        if(typeof searchStore(name) === 'object') {
+          sendMessage(JSON.stringify(obj));
+        } else {
+          sendMessage(searchStore(name));
+        }
+      } else {
+        sendMessage(notExist);
+      }
+    }
+
+    const sendMessage = function(message) {
+      message !== "" || message !== undefined 
+        ? bot.sendMessage(chatId, message)
+        : bot.sendMessage(chatId, errorMesage);
     }
 
     const sendList = function() {
       const list = getList();
       const listMessage = "Things available:\n " + list.join('\n ');
-      bot.sendMessage(chatId, listMessage);
+      sendMessage(listMessage);
     }
 
     switch(command) {
       case '/help':
-        bot.sendMessage(chatId, helpMessage);
+        sendMessage(helpMessage);
         break;
       case '/get':
         const name = messageText.substring(commandEnd);         // getting name of the thing from user message
@@ -49,7 +64,7 @@ export default function telegramBot(getValue, getList, setValue) {
         break;
       default:
         const wtf = 'wtf?!'
-        bot.sendMessage(chatId, wtf);
+        sendMessage(wtf);
     }
   })  
 };
