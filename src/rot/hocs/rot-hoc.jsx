@@ -45,6 +45,10 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
       return this.props.getDataAction(n);
     }
 
+    getList = () => {
+      return this.props.getListAction();
+    }
+
     once = (func, n = this.name) => {
       if (!onceObj[n]) {
         onceObj[n] = true;
@@ -60,6 +64,7 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
           setValue={this.setValue} 
           getValue={this.getValue}
           getData={this.getData}
+          getList={this.getList}
           once={this.once}
           name={this.name}
           data={this.data}

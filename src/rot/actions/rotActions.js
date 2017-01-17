@@ -34,3 +34,9 @@ export function getDataAction(name) {
     else console.log(`error getting data of ${name} device`);
   }
 }
+
+export function getListAction() {
+  return (dispatch, getState) => {
+    return Object.keys(getState().rotReducer.things);
+  }
+}
