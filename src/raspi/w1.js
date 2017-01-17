@@ -1,5 +1,7 @@
 import sensor from 'ds18x20';
 
+let oldTemp = 0;
+
 const w1 = (onChange, id) => {
   const isLoaded = sensor.isDriverLoaded();
   if (!isLoaded) return console.log('1-Wire driver is not loaded');
@@ -11,10 +13,13 @@ const w1 = (onChange, id) => {
       if (err) {
         console.error(err);
       } else {
-        onChange(temp);
+        if (temp !== oldTemp) {
+          onChange(temp);
+          oldTemp = temp;
+        }
       }
     });
-  }, 10000);
+  }, 1000);
 }
 
 export default w1;
