@@ -16,7 +16,7 @@ let serverProcess;
 serverCompiler.watch(
   {
     aggregateTimeout: 300,
-    poll: true,
+    poll: 2000,
     ignored: /node_modules/,
   }, 
   (err, stats) => {
