@@ -23,7 +23,7 @@ export function getValueAction(name) {
   return (dispatch, getState) => {
     const device = getState().rotReducer.things[name];
     if (device) return device.value;
-    else console.log(`error getting value of ${name} device`);
+    //else console.log(`error getting value of ${name} device`);
   }
 }
 
@@ -31,7 +31,7 @@ export function getDataAction(name) {
   return (dispatch, getState) => {
     const device = getState().rotReducer.things[name];
     if (device) return device.data;
-    else console.log(`error getting data of ${name} device`);
+    //else console.log(`error getting data of ${name} device`);
   }
 }
 
