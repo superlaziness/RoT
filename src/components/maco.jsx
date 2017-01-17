@@ -6,6 +6,7 @@ import {
   TelegramBot,
   W1TempSensor,
   RoT,
+  RaspiStats,
 } from 'rot/components';
 
 import ProgressBar from "components/progressbar";
@@ -41,6 +42,7 @@ class Maco extends Component {
         {/*<Encoder/>*/}
         <KeypressSensor name="reqTemp" data={reqTempData} />
         <TelegramBot/>
+        <RaspiStats/>
         <RoT name="reqTemp">{(reqTemp) => (
           <div>
             <ProgressBar value={reqTemp}/>
