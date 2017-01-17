@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import {
   KeypressSensor,
@@ -9,12 +9,14 @@ import {
   RaspiStats,
 } from 'rot/components';
 
-import ProgressBar from "components/progressbar";
+import ProgressBar from 'components/progressbar';
+import CpuChart from 'components/cpu-chart';
 
 const tempData = {
   description: 'Temperature sensor',
   validate: [-100, 100],
   unit: 'C',
+  collect: 10,
 }
 
 const reqTempData = {
@@ -33,7 +35,8 @@ class Maco extends Component {
   }
 
   render() {
-    const RTChart = this.RTChart;
+    let Chart = null;
+
     
     return (
       <div>
@@ -51,6 +54,7 @@ class Maco extends Component {
             )
           }}
         </RoT>
+        <CpuChart/>
         
         {/*<Encoder/>*/}
         <KeypressSensor name="reqTemp" data={reqTempData} />
