@@ -16,7 +16,7 @@ class RaspiStats extends Component {
     const { setValue, getValue, interval } = props;
 
     if (__RASPI__) props.once(require('rot/raspi/stats.js').default)
-      (handleCpuChange, handleMemoryChange, interval);
+      (this.handleCpuChange, this.handleMemoryChange, interval);
    // else if (__NODE__) props.once(emulateTempSensor)(setValue, interval);
   }
 
