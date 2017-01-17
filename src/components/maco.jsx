@@ -33,13 +33,24 @@ class Maco extends Component {
   }
 
   render() {
+    const RTChart = this.RTChart;
     
     return (
       <div>
         <h1>RoT Preview</h1>
         <h2><RoT name="temp">{(val) => (<span>{val}</span>)}</RoT> C <RoT name="heating">{(val) => (<span>{val ? 'heating' : ''}</span>)}</RoT></h2>
-        <h2>Cpu: <RoT name="raspiStats">{(val) => (<span>{val && val.cpu && val.cpu.percentUsed}</span>)}</RoT>%</h2>
-        <h2>Memory: <RoT name="raspiStats">{(val) => (<span>{val && val.memory && val.memory.percentUsed}</span>)}</RoT>%</h2>
+        <RoT name="raspiStats">
+          {(stats) => {
+            const cpu = stats && stats.cpu && stats.cpu.percentUsed;
+            const memory = stats && stats.memory && stats.memory.percentUsed;
+            return (
+              <div> 
+                <h2>CPU: {cpu}%</h2>
+                <h2>Memory: {memory}%</h2>
+              </div>
+            )
+          }}
+        </RoT>
         
         {/*<Encoder/>*/}
         <KeypressSensor name="reqTemp" data={reqTempData} />

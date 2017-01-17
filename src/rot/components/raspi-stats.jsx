@@ -3,11 +3,12 @@ import RoTHOC from 'rot/hocs/rot-hoc';
 
 //<W1TempSensor name="name" data={dataObj} id="w1-sensor-id" interval={read-interval-ms} />
 
-// const emulateTempSensor = (onChange, interval) => {
-//   setInterval(() => {
-//     onChange(Math.floor(Math.random() * 30) + 20);
-//   }, interval);
-// }
+const emulateStats = (handleCpuChange, handleMemoryChange, interval) => {
+  setInterval(() => {
+    handleCpuChange(false, {percentUsed: Math.floor(Math.random() * 100)});
+    handleMemoryChange(false, {percentUsed: Math.floor(Math.random() * 100)});
+  }, interval);
+}
 
 class RaspiStats extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class RaspiStats extends Component {
 
     if (__RASPI__) props.once(require('rot/raspi/stats.js').default)
       (this.handleCpuChange, this.handleMemoryChange, interval);
-   // else if (__NODE__) props.once(emulateTempSensor)(setValue, interval);
+    else if (__NODE__) props.once(emulateStats)(this.handleCpuChange, this.handleMemoryChange, interval);
   }
 
   static propTypes = {
