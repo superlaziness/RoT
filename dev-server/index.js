@@ -17,6 +17,7 @@ serverCompiler.watch(
   {
     aggregateTimeout: 300,
     poll: true,
+    ignored: /node_modules/,
   }, 
   (err, stats) => {
     if (serverProcess) serverProcess.kill();
