@@ -37,18 +37,24 @@ class Maco extends Component {
       <div>
         <h1>RoT Preview</h1>
         <h2><RoT name="temp">{(val) => (<span>{val}</span>)}</RoT> C <RoT name="heating">{(val) => (<span>{val ? 'heating' : ''}</span>)}</RoT></h2>  
-        <RoT name="reqTemp">{(val) => (<ProgressBar value={val}/>)}</RoT>
+        
         {/*<Encoder/>*/}
         <KeypressSensor name="reqTemp" data={reqTempData} />
         <TelegramBot/>
-        <W1TempSensor name="temp" id="10-0008024f9ea9" interval={10000} data={tempData}>
-          {(temp) => {
-            const heating = temp < 30 ? 1 : 0;
-            return (
-              <RaspiDigitalActuator name="heating" data={heatingData} value={heating} pin={37}/>
-            )
-          }}
-        </W1TempSensor>
+        <RoT name="reqTemp">{(reqTemp) => (
+          <div>
+            <ProgressBar value={reqTemp}/>
+            <W1TempSensor name="temp" id="10-0008024f9ea9" interval={10000} data={tempData}>
+              {(temp) => {
+                const heating = temp < reqTemp ? 1 : 0;
+                return (
+                  <RaspiDigitalActuator name="heating" data={heatingData} value={heating} pin={37}/>
+                )
+              }}
+            </W1TempSensor>
+          </div>
+        )}</RoT>
+          
       </div>
     );
   }
