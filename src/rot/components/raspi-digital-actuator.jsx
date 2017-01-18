@@ -6,11 +6,6 @@ import RoTHOC from 'rot/hocs/rot-hoc';
 let lastValue = false;
 
 class RaspiDigitalActuator extends Component {
-  constructor(props) {
-    super(props);
-    const { getValue, name, pin, value } = props;
-  };
-
   static propTypes = {
     name: PropTypes.string.isRequired,
     data: PropTypes.shape({
@@ -26,7 +21,7 @@ class RaspiDigitalActuator extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    const { value, getValue, pin } = nextProps;
+    const { value, getValue, name, pin } = nextProps;
     if (__RASPI__) require('rot/raspi/digital-output.js').default(getValue(name), pin);
     if (__NODE__ && (value !== undefined)) this.handleSetValue(nextProps);
   };
