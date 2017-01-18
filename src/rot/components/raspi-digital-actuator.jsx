@@ -26,8 +26,9 @@ class RaspiDigitalActuator extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    const { value, getValue, pin } = nextProps;
     if (__RASPI__) require('rot/raspi/digital-output.js').default(getValue(name), pin);
-    if (__NODE__ && (nextProps.value !== undefined)) this.handleSetValue(nextProps);
+    if (__NODE__ && (value !== undefined)) this.handleSetValue(nextProps);
   };
 
   handleSetValue = (nextProps) => {
