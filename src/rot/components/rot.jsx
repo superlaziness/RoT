@@ -6,8 +6,6 @@ import RoTHOC from 'rot/hocs/rot-hoc';
 class RoT extends Component {
   constructor(props) {
     super(props);
-    const { value, setValue } = props;
-    if (__NODE__ && value !== undefined) setValue(value);
   };
 
   static propTypes = {
@@ -19,6 +17,11 @@ class RoT extends Component {
     getCollection: PropTypes.func.isRequired,
     getData: PropTypes.func.isRequired,
   };
+
+  componentWillReceiveProps(nextProps) {
+    const { value, setValue } = nextProps;
+    if (__NODE__ && value !== undefined) setValue(value);
+  }
 
   render() {
     const { children, getValue, getCollection, getData, name } = this.props;

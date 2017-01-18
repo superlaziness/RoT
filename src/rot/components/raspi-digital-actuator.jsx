@@ -9,8 +9,6 @@ class RaspiDigitalActuator extends Component {
   constructor(props) {
     super(props);
     const { getValue, name, pin, value } = props;
-    
-    if (__RASPI__) require('rot/raspi/digital-output.js').default(getValue(name), pin);
   };
 
   static propTypes = {
@@ -28,6 +26,7 @@ class RaspiDigitalActuator extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    if (__RASPI__) require('rot/raspi/digital-output.js').default(getValue(name), pin);
     if (__NODE__ && (nextProps.value !== undefined)) this.handleSetValue(nextProps);
   };
 
