@@ -30,7 +30,8 @@ export default function telegramBot(getValue, getList, setValue) {
       const thingValue = searchStore(name);
       if (thingValue !== undefined) {
         if(typeof thingValue === 'object') {
-          sendMessage(JSON.stringify(thingValue));
+          console.log(thingValue);
+          sendMessage(parseObject(thingValue));
         } else {
           sendMessage(thingValue);
         }
@@ -43,6 +44,18 @@ export default function telegramBot(getValue, getList, setValue) {
       message !== "" || message !== undefined 
         ? bot.sendMessage(chatId, message)
         : bot.sendMessage(chatId, errorMesage);
+    }
+
+    const parseObject = function(object, str = '') {
+      for(let name in object) {
+        if(typeof object[name] === 'object') {
+          str += name + ":\n" + parseObject(object[name]);
+          parseObject(object[name]);
+        } else {
+          str += "- " + name + ": " + object[name] + "\n";
+        }
+      }
+      return str;
     }
 
     const sendList = function() {
