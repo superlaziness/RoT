@@ -18,6 +18,10 @@ fs.readdirSync('node_modules')
     nodeModules[mod] = 'commonjs ' + mod;
   });
 
+delete nodeModules['react-dom'];
+
+console.log('nodeModules', nodeModules);
+
 module.exports = {
 	entry: ["server"],
 	output: {
@@ -25,46 +29,34 @@ module.exports = {
 		filename: "server.js",
 		publicPath: path.join(__dirname, "/"),
 	},
-	target: "node",
+	target: "async-node",
 	resolve: {
-		moduleDirectories: ['node_modules'],
-    root: path.join(__dirname, "src"),
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules",
+    ],
 		extensions: [
-			"",
 			".js",
 			".jsx",
 			".json",
 		],
 	},
 	module: {
-		noParse: ['ws'],
-		loaders: [
+		noParse: /ws/,
+		rules: [
 			{
 				test: /\.(js|jsx)$/,
 				loader: "babel-loader",
-				query: {
-					presets: [
-						'babel-preset-es2015',
-						'babel-preset-stage-1',
-						'babel-preset-react',
-					].map(require.resolve),
-          plugins: ['babel-plugin-transform-decorators-legacy'].map(require.resolve),
-				},
 				exclude: /node_modules/,
 			},
-			{
-				test: /\.json$/,
-				loader: "json-loader",
-			}
 		],
 	},
 	node: {
-    console: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
+    console: false,
+    fs: false,
+    net: false,
+    tls: false,
   },
-  externals: nodeModules,
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
   ]

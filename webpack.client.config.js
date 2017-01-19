@@ -16,26 +16,23 @@ module.exports = {
     publicPath: "http://localhost:8080/dist/",
   },
   resolve: {
-    moduleDirectories: ['node_modules'],
-    root: path.join(__dirname, "src"),
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules",
+    ],
     extensions: [
-      "",
       ".js",
       ".jsx",
       ".json",
     ],
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(js|jsx)$/,
-        loaders: ['react-hot-loader', 'babel-loader'],
+        use: ["react-hot-loader", "babel-loader"],
         exclude: /node_modules/,
       },
-      {
-        test: /\.json$/,
-        loader: "json-loader",
-      }
     ],
   },
   plugins: [
