@@ -33,7 +33,7 @@ const ProgressBar = (props) => {
 
   return (
     <div style={containerStyle}>
-      <h1 style={textCentred}>{this.props.value}</h1>
+      <h1 style={textCentred}>{props.value}</h1>
       <div style={innerDivStyle} />
     </div>
   );

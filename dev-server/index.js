@@ -48,5 +48,5 @@ serverCompiler.watch(
     //------------
 
     process.stdin.pipe(serverProcess.stdin);
-  },
+  }
 );
