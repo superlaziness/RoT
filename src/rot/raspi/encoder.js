@@ -15,8 +15,8 @@ const encoder = (callback, pinCW, pinCCW) => {
     return false;
   };
 
-  rpio.poll(pinCW, cb, rpio.POLL_HIGH);
-  rpio.poll(pinCCW, cb, rpio.POLL_HIGH);
+  rpio.poll(pinCW, handler, rpio.POLL_HIGH);
+  rpio.poll(pinCCW, handler, rpio.POLL_HIGH);
 }
 
 export default encoder;
