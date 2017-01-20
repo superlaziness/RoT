@@ -75,7 +75,6 @@ export default function telegramBot(getValue, getList, setValue) {
         sendList();
         break;
       default:
-        const wtf = 'wtf?!';
         sendMessage(wtf);
     }
   });
