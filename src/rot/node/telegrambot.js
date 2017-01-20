@@ -2,7 +2,7 @@ import TelegramBot from 'node-telegram-bot-api';
 
 const bot_token = '329181543:AAE7wI9K8U-a2321XF_GY7RlTmXGNQbUTWY';
 
-export default function telegramBot(getValue, getList, setValue) {
+export default function telegramBot(getValue, getList) {
   const bot = new TelegramBot(bot_token, { polling: true });
 
   bot.on('message', (msg) => {
@@ -25,6 +25,25 @@ export default function telegramBot(getValue, getList, setValue) {
       return getValue(thing);
     };
 
+    const sendMessage = function (message) {
+      message !== '' || message !== undefined
+        ? bot.sendMessage(chatId, message)
+        : bot.sendMessage(chatId, errorMesage);
+    };
+
+    const parseObject = function (object, str = '') {
+      let newStr = str;
+      for (const name in object) {
+        if (typeof object[name] === 'object') {
+          newStr += `${name}:\n${parseObject(object[name])}`;
+          parseObject(object[name]);
+        } else {
+          newStr += `- ${name}: ${object[name]}\n`;
+        }
+      }
+      return newStr;
+    };
+
     const sendValue = function (name) {
       const thingValue = searchStore(name);
       if (thingValue !== undefined) {
@@ -39,24 +58,6 @@ export default function telegramBot(getValue, getList, setValue) {
       }
     };
 
-    const sendMessage = function (message) {
-      message !== '' || message !== undefined
-        ? bot.sendMessage(chatId, message)
-        : bot.sendMessage(chatId, errorMesage);
-    };
-
-    const parseObject = function (object, str = '') {
-      for (const name in object) {
-        if (typeof object[name] === 'object') {
-          str += `${name}:\n${parseObject(object[name])}`;
-          parseObject(object[name]);
-        } else {
-          str += `- ${name}: ${object[name]}\n`;
-        }
-      }
-      return str;
-    };
-
     const sendList = function () {
       const list = getList();
       const listMessage = `Things available:\n ${list.join('\n ')}`;
@@ -67,10 +68,12 @@ export default function telegramBot(getValue, getList, setValue) {
       case '/help':
         sendMessage(helpMessage);
         break;
-      case '/get':
-        const name = messageText.substring(commandEnd + 1);         // getting name of the thing from user message
+      case '/get': {
+        // getting name of the thing from user message
+        const name = messageText.substring(commandEnd + 1);
         sendValue(name);
         break;
+      }
       case '/list':
         sendList();
         break;

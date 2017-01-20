@@ -8,8 +8,9 @@ const PiStats = (function () {
   function getValFromLine(line) {
     const match = line.match(/[0-9]+/gi);
     if (match !== null) {
-      return parseInt(match[0]);
-    } else { return null; }
+      return parseInt(match[0], 10);
+    }
+    return null;
   }
 
   const getMemoryInfo = function (cb) {
@@ -51,9 +52,9 @@ const PiStats = (function () {
       const cpuTimes = lines[0].match(/[0-9]+/gi);
       currentCPUInfo.total = 0;
       // We'll count both idle and iowait as idle time
-      currentCPUInfo.idle = parseInt(cpuTimes[3]) + parseInt(cpuTimes[4]);
+      currentCPUInfo.idle = parseInt(cpuTimes[3], 10) + parseInt(cpuTimes[4], 10);
       for (let i = 0; i < cpuTimes.length; i++) {
-        currentCPUInfo.total += parseInt(cpuTimes[i]);
+        currentCPUInfo.total += parseInt(cpuTimes[i], 10);
       }
       currentCPUInfo.active = currentCPUInfo.total - currentCPUInfo.idle;
       currentCPUInfo.percentUsed = calculateCPUPercentage(lastCPUInfo, currentCPUInfo);
@@ -67,18 +68,6 @@ const PiStats = (function () {
   return {
     getMemoryInfo,
     getCPUInfo,
-    printMemoryInfo() {
-      getMemoryInfo((err, data) => {
-        console.log('total\tused\tfree\tcached');
-        console.log(`${data.total}\t${data.used}\t${data.free}\t${data.cached}`);
-        console.log(`Memory Usage:\t${data.percentUsed}%`);
-      });
-    },
-    printCPUInfo() {
-      getCPUInfo((err, data) => {
-        console.log(`Current CPU Usage: ${data.percentUsed}%`);
-      });
-    },
   };
 }());
 

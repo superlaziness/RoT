@@ -1,14 +1,12 @@
 const socketIOMiddleware = () => {
   let socketDispatch;
   let socketClient;
-  let socketServer;
   let io;
 
   if (!__BROWSER__) {
     io = require('socket.io')(2002);
     io.on('connection', socket => {
       // console.log('connected client');
-      socketServer = socket;
       socket.on('socket action', data => {
         if (!socketDispatch) return;
         socketDispatch(data);
@@ -25,7 +23,7 @@ const socketIOMiddleware = () => {
     });
   }
 
-  return ({ dispatch, getState }) => {
+  return ({ dispatch }) => {
     socketDispatch = dispatch;
     return next => action => {
       if (action.socket && !action.recieved) {
