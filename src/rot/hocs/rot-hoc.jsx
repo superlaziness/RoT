@@ -22,13 +22,20 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
         validate: PropTypes.array,
         unit: PropTypes.string,
       }),
+      rotState: PropTypes.shape({
+        things: PropTypes.object.isRequired,
+      }).isRequired,
       setValueAction: PropTypes.func.isRequired,
-      getValueAction: PropTypes.func.isRequired,
-      getDataAction: PropTypes.func.isRequired,
+      registerAction: PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+      name: null,
+      data: null,
     }
 
     register = () => {
-      console.log(`RoT: registered device ${this.name}`);
+      if (__NODE__) process.stdout.write(`RoT: registered device ${this.name} \n`);
       this.props.registerAction(this.name, this.data);
     }
 
@@ -37,26 +44,30 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
     }
 
     getValue = (n = this.name) => {
-      return this.props.getValueAction(n);
+      const thing = this.props.rotState.things[n];
+      return thing && thing.value;
     }
 
     getCollection = (n = this.name) => {
-      return this.props.getCollectionAction(n);
+      const thing = this.props.rotState.things[n];
+      return thing && thing.collection;
     }
 
     getData = (n = this.name) => {
-      return this.props.getDataAction(n);
+      const thing = this.props.rotState.things[n];
+      return thing && thing.data;
     }
 
     getList = () => {
-      return this.props.getListAction();
+      return Object.keys(this.props.rotState.things);
     }
 
     once = (func, n = this.name) => {
       if (!onceObj[n]) {
         onceObj[n] = true;
         return func;
-      } else return () => {};
+      }
+      return () => {};
     }
 
     render() {

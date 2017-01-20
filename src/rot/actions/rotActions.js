@@ -18,32 +18,3 @@ export function registerAction(name, data) {
     data,
   };
 }
-
-export function getValueAction(name) {
-  return (dispatch, getState) => {
-    const device = getState().rotReducer.things[name];
-    if (device) return device.value;
-    // else console.log(`error getting value of ${name} device`);
-  };
-}
-
-export function getCollectionAction(name) {
-  return (dispatch, getState) => {
-    const device = getState().rotReducer.things[name];
-    if (device) return device.collection || [];
-  };
-}
-
-export function getDataAction(name) {
-  return (dispatch, getState) => {
-    const device = getState().rotReducer.things[name];
-    if (device) return device.data;
-    // else console.log(`error getting data of ${name} device`);
-  };
-}
-
-export function getListAction() {
-  return (dispatch, getState) => {
-    return Object.keys(getState().rotReducer.things);
-  };
-}
