@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from "react";
-import { connect } from "react-redux";
-import * as actions from "../actions/rotActions";
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions/rotActions';
 
 const ConnectHOC = connect(state => ({ rotState: state.rotReducer }), actions);
 const onceObj = {};
 
 const RoTHOC = (WrappedComponent, deviceProps = {}) => {
-
   const RoTComponent = class extends Component {
 
     constructor(props) {
@@ -61,11 +60,10 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
     }
 
     render() {
-
       return (
         <WrappedComponent
           {...this.props}
-          setValue={this.setValue} 
+          setValue={this.setValue}
           getValue={this.getValue}
           getCollection={this.getCollection}
           getData={this.getData}
@@ -74,9 +72,9 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
           name={this.name}
           data={this.data}
         />
-      )
+      );
     }
-  }
+  };
 
   return ConnectHOC(RoTComponent);
 };

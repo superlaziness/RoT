@@ -38,16 +38,16 @@ import * as c from '../constants';
 const updateObject = (obj = {}, name, value) => {
   const updatedObject = {};
   updatedObject[name] = value;
-  return { ...obj, ...updatedObject }
+  return { ...obj, ...updatedObject };
 };
 
 const updateCollection = (value, device) => {
   if (!device.data || !device.data.collect) return false;
-  let collection = device.collection ? device.collection.slice() : [];
+  const collection = device.collection ? device.collection.slice() : [];
   collection.push(value);
   if (collection.length > device.data.collect) collection.splice(0, 1);
   return collection;
-}
+};
 
 const defaultState = {
   things: {},
@@ -59,18 +59,18 @@ export default function rotReducer(state = defaultState, a) {
   switch (a.type) {
     case c.SET_VALUE: {
       const data = a.data || state.things[a.name] && state.things[a.name].data;
-      return { 
-        ...state, 
+      return {
+        ...state,
         things: updateObject(
-          state.things, 
-          a.name, 
-          { 
-            value: a.value, 
+          state.things,
+          a.name,
+          {
+            value: a.value,
             data,
             collection: updateCollection(a.value, state.things[a.name]) || [],
-          }
+          },
         ),
-      }
+      };
     }
 
     case c.REGISTER: {
@@ -82,9 +82,9 @@ export default function rotReducer(state = defaultState, a) {
           {
             value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0,
             data: a.data,
-          }
+          },
         ),
-      }
+      };
     }
 
     default:

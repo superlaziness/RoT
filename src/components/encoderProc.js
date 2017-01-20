@@ -14,11 +14,11 @@ function encoder(action) {
       action(val);
     });
   });
-};
+}
 
 function resolveWiringPiToGPIO(wiringPiPin) {
   try {
-    return getPins()[wiringPiPin].pins.find( p => /GPIO/.test(p) ).replace('GPIO', '')
+    return getPins()[wiringPiPin].pins.find(p => /GPIO/.test(p)).replace('GPIO', '');
   } catch (e) {
     console.error('Cannot find GPIO number for pin: ', wiringPiPin);
     throw e;
@@ -29,7 +29,7 @@ const INPUT = 'in';
 const EDGE_BOTH = 'both';
 
 class Encoder extends EventEmitter {
-  constructor(config = {a: {pin: 'P1-15'}, b: {pin: 'P1-16'}}) {
+  constructor(config = { a: { pin: 'P1-15' }, b: { pin: 'P1-16' } }) {
     super();
 
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -62,17 +62,17 @@ class Encoder extends EventEmitter {
     if (a === 0 && b === 1) {
       this.value++;
       changed = true;
-    };
+    }
     if (a === 1 && b === 0) {
       this.value--;
       changed = true;
-    };
+    }
 
     console.log('encoder', this.value);
 
     if (changed) this.emit('change', this.value);
   }
-};
+}
 
 export default encoder;
 

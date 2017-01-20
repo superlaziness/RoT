@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component, PropTypes } from 'react';
 import RoTHOC from 'rot/hocs/rot-hoc';
 
-//<W1TempSensor name="name" data={dataObj} id="w1-sensor-id" interval={read-interval-ms} />
+// <W1TempSensor name="name" data={dataObj} id="w1-sensor-id" interval={read-interval-ms} />
 
 const emulateTempSensor = (onChange, interval) => {
   setInterval(() => {
     onChange(Math.floor(Math.random() * 30) + 20);
   }, interval);
-}
+};
 
 class W1TempSensor extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class W1TempSensor extends Component {
 
     if (__RASPI__) props.once(require('rot/raspi/w1.js').default)(setValue, id, interval);
     else if (__NODE__) props.once(emulateTempSensor)(setValue, interval);
-  };
+  }
 
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -40,7 +40,7 @@ class W1TempSensor extends Component {
 
   render() {
     const { children, getValue, name } = this.props;
-    return children && children(getValue(name)) || null
+    return children && children(getValue(name)) || null;
   }
 }
 

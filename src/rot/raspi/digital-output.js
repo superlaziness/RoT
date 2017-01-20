@@ -8,6 +8,6 @@ const digitalOutput = (value, pin) => {
     rpio.write(pin, value ? rpio.HIGH : rpio.LOW);
     lastValue = value;
   }
-}
+};
 
 export default digitalOutput;

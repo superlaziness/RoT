@@ -30,9 +30,9 @@ function Html({ script, style, children, state }) {
 }
 
 Html.propTypes = {
-  // style: PropTypes.string.isRequired,
-  script: PropTypes.string,
-  children: PropTypes.string,
+  style: PropTypes.string.isRequired,
+  script: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
   state: PropTypes.object.isRequired,
 };
 

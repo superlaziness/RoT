@@ -1,14 +1,15 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component, PropTypes } from 'react';
 import RoTHOC from 'rot/hocs/rot-hoc';
 
-//<TelegramBot />
+// <TelegramBot />
 
 class TelegramBot extends Component {
   constructor(props) {
     super(props);
-    if (__NODE__) props.once(require('rot/node/telegrambot.js').default, 'telegramBot')
-      (this.props.getValue, this.props.getList, this.props.setValue);
-  };
+    if (__NODE__) {
+      props.once(require('rot/node/telegrambot.js').default, 'telegramBot')(this.props.getValue, this.props.getList, this.props.setValue);
+    }
+  }
 
   static propTypes = {
     setValue: PropTypes.func.isRequired,
@@ -17,7 +18,7 @@ class TelegramBot extends Component {
   };
 
   render() {
-    return null
+    return null;
   }
 }
 

@@ -5,11 +5,11 @@ import W1TempSensor from './w1-temp-sensor';
 import RoT from './rot';
 import RaspiStats from './raspi-stats';
 
-export { 
+export {
   KeypressSensor,
   RaspiDigitalActuator,
   TelegramBot,
   W1TempSensor,
   RoT,
   RaspiStats,
-}
+};

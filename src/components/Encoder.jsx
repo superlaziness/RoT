@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import RoTHOC from 'components/hocs/rot';
 
 const sensorData = {
@@ -7,8 +7,8 @@ const sensorData = {
     description: 'Required temperature encoder',
     unit: 'C',
     validate: [15, 40],
-  }
-}
+  },
+};
 
 class Encoder extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Encoder extends Component {
   }
 
   render() {
-    return null
+    return null;
   }
 }
 

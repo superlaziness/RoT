@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component, PropTypes } from 'react';
 import RoTHOC from 'rot/hocs/rot-hoc';
 
-//<RaspiDigitalActuator name="name" data={dataObj} pin={gpio-pin-num} value={bool}/>
+// <RaspiDigitalActuator name="name" data={dataObj} pin={gpio-pin-num} value={bool}/>
 
-let lastValue = false;
+const lastValue = false;
 
 class RaspiDigitalActuator extends Component {
   static propTypes = {
@@ -24,7 +24,7 @@ class RaspiDigitalActuator extends Component {
     const { value, getValue, name, pin } = nextProps;
     if (__RASPI__) require('rot/raspi/digital-output.js').default(getValue(name), pin);
     if (__NODE__ && (value !== undefined)) this.handleSetValue(nextProps);
-  };
+  }
 
   handleSetValue = (nextProps) => {
     const { value, setValue } = nextProps;
@@ -33,7 +33,7 @@ class RaspiDigitalActuator extends Component {
 
   render() {
     const { children, getValue, name } = this.props;
-    return children && children(getValue(name)) || null
+    return children && children(getValue(name)) || null;
   }
 }
 

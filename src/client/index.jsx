@@ -12,7 +12,7 @@ function run() {
   const initialState = JSON.parse(
     document
       .getElementById('source')
-      .getAttribute('data-initial-state')
+      .getAttribute('data-initial-state'),
   );
 
   const store = configureStore(initialState);
@@ -20,9 +20,9 @@ function run() {
 
   ReactDOM.render(
     <Provider store={store}>
-      <Maco/>
+      <Maco />
     </Provider>,
-    container
+    container,
   );
 }
 

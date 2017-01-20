@@ -12,14 +12,12 @@ const w1 = (onChange, id, interval) => {
     sensor.get(id, (err, temp) => {
       if (err) {
         console.error('RoT Error: w1 temp sensor', err);
-      } else {
-        if (temp !== oldTemp) {
-          onChange(temp);
-          oldTemp = temp;
-        }
+      } else if (temp !== oldTemp) {
+        onChange(temp);
+        oldTemp = temp;
       }
     });
   }, interval);
-}
+};
 
 export default w1;
