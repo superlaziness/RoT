@@ -42,6 +42,7 @@ const updateObject = (obj = {}, name, value) => {
 };
 
 const updateCollection = (value, device) => {
+  if (!value) return false;
   if (!device.data || !device.data.collect) return false;
   const collection = device.collection ? device.collection.slice() : [];
   collection.push(value);
@@ -67,7 +68,9 @@ export default function rotReducer(state = defaultState, a) {
           {
             value: a.value,
             data,
-            collection: updateCollection(a.value, state.things[a.name]) || [],
+            collection: updateCollection(a.value, state.things[a.name])
+              || state.things[a.name].collection
+              || [],
           },
         ),
       };
@@ -82,6 +85,7 @@ export default function rotReducer(state = defaultState, a) {
           {
             value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0,
             data: a.data,
+            collection: state.things[a.name] && state.things[a.name].collection || [],
           },
         ),
       };

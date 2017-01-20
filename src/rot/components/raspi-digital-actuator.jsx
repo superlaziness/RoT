@@ -1,23 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import { Component, PropTypes } from 'react';
 import RoTHOC from 'rot/hocs/rot-hoc';
 
 // <RaspiDigitalActuator name="name" data={dataObj} pin={gpio-pin-num} value={bool}/>
 
-const lastValue = false;
-
 class RaspiDigitalActuator extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    data: PropTypes.shape({
-      description: PropTypes.string,
-      validate: PropTypes.array,
-      unit: PropTypes.string,
-    }),
     value: PropTypes.number,
     pin: PropTypes.number.isRequired,
     children: PropTypes.func,
     getValue: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    value: null,
+    children: null,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -33,7 +31,7 @@ class RaspiDigitalActuator extends Component {
 
   render() {
     const { children, getValue, name } = this.props;
-    return children && children(getValue(name)) || null;
+    return children && children(getValue(name));
   }
 }
 

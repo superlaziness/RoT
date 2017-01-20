@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/rotActions';
 
 const ConnectHOC = connect(state => ({ rotState: state.rotReducer }), actions);
-const onceObj = {};
 
 const RoTHOC = (WrappedComponent, deviceProps = {}) => {
   const RoTComponent = class extends Component {
@@ -12,7 +11,6 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
       super(props);
       this.name = props.name || deviceProps.name;
       this.data = props.data || deviceProps.data;
-      if (__NODE__ && this.name && this.data) this.once(this.register, `${this.name}:register`)();
     }
 
     static propTypes = {
@@ -32,6 +30,10 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
     static defaultProps = {
       name: null,
       data: null,
+    }
+
+    componentDidMount() {
+      if (__NODE__ && this.name && this.data) this.register();
     }
 
     register = () => {
@@ -60,14 +62,6 @@ const RoTHOC = (WrappedComponent, deviceProps = {}) => {
 
     getList = () => {
       return Object.keys(this.props.rotState.things);
-    }
-
-    once = (func, n = this.name) => {
-      if (!onceObj[n]) {
-        onceObj[n] = true;
-        return func;
-      }
-      return () => {};
     }
 
     render() {
