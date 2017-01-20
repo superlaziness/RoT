@@ -18,3 +18,5 @@ const encoder = (callback, pinCW, pinCCW) => {
   rpio.poll(pinCW, cb, rpio.POLL_HIGH);
   rpio.poll(pinCCW, cb, rpio.POLL_HIGH);
 }
+
+export default encoder;
