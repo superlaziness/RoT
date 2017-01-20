@@ -73,10 +73,8 @@
     "socket.io-client": "1.7.2"
   },
   "optionalDependencies": {
-    "onoff": "^1.1.1",
-    "raspi": "*",
-    "raspi-board": "*",
-    "raspi-gpio": "*",
+    "rpio": "*",
+    "ds18x20": "*",
     "fsevents": "^1.0.17"
   }
 }

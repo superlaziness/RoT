@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { socketIOMiddleware, reducer } from 'rot';
-import thunk from 'redux-thunk';
-
 
 const configureStore = (initialState) => {
   const socketMW = socketIOMiddleware();
-  const middlewares = [socketMW, thunk];
+  const middlewares = [socketMW];
 
   let enhancer;
   if (__DEV__) {
