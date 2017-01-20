@@ -7,6 +7,7 @@ import {
   W1TempSensor,
   RoT,
   RaspiStats,
+  EncoderSensor,
 } from 'rot/components';
 
 import ProgressBar from 'components/progressbar';
@@ -48,7 +49,8 @@ const Maco = () => (
     <CpuChart />
 
     {/* <Encoder/>*/}
-    <KeypressSensor name="reqTemp" data={reqTempData} />
+    <EncoderSensor name="reqTemp" data={reqTempData} pinCW={15} pinCCW={16} />
+    <KeypressSensor name="reqTemp" />
     <TelegramBot />
     <RaspiStats />
     <RoT name="reqTemp">{(reqTemp) => (
