@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import ProgressBar from 'components/progressbar';
 
 export default class SimpleRegulatorViewer extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     const containerStyle = {
       width: '800px',
