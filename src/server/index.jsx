@@ -3,14 +3,40 @@ import { Provider } from 'react-redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import path from 'path';
 import { jsdom } from 'jsdom';
+import fs from 'fs';
 
 import configureStore from 'store';
 
 import Maco from 'components/maco';
 import Html from 'components/html';
 
+const readStore = () => {
+  let storeState;
+  fs.readFile('savedstore.json', 'utf8', (err, data) => {
+    if (err) throw (err);
+    try {
+      storeState = JSON.parse(data);
+    } catch (err) {
+      throw (err);
+    } 
+  });
+  return storeState;
+}
+
+const initialState = readStore();
+
 // Configure Redux store
-const store = configureStore();
+const store = configureStore(initialState);
+
+const writeStore = () => {
+  const storeState = store.getState();
+  fs.writeFile('savedstore.json', JSON.stringify(storeState), (err) => {
+    if (err) throw (err);
+  })
+}
+
+// Save store state to file in case of restart
+store.subscribe(writeStore);
 
 // Prepare jsdom env
 const htmlString = '<html><body><div id="app"></div></body></html>';
