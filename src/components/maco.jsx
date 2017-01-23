@@ -22,7 +22,7 @@ const tempData = {
 
 const reqTempData = {
   description: 'Required temperature',
-  validate: [0, 50],
+  validate: [25, 28],
   unit: 'C',
 };
 

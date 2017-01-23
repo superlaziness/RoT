@@ -50,6 +50,13 @@ const updateCollection = (value, device) => {
   return collection;
 };
 
+const validatedValue = (value, validation) => {
+  if (!validation || validation.length < 2) return value;
+  if (value < validation[0]) return validation[0];
+  if (value > validation[1]) return validation[1];
+  return value;
+}
+
 const defaultState = {
   things: {},
   groups: {},
@@ -66,7 +73,7 @@ export default function rotReducer(state = defaultState, a) {
           state.things,
           a.name,
           {
-            value: a.value,
+            value: validatedValue(a.value, state.things[a.name].data.validate),
             data,
             collection: updateCollection(a.value, state.things[a.name])
               || state.things[a.name].collection
@@ -83,7 +90,7 @@ export default function rotReducer(state = defaultState, a) {
           state.things,
           a.name,
           {
-            value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0,
+            value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || (a.data.validate && a.data.validate[0]) || 0,
             data: a.data,
             collection: state.things[a.name] && state.things[a.name].collection || [],
           },
