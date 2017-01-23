@@ -90,7 +90,7 @@ export default function rotReducer(state = defaultState, a) {
           state.things,
           a.name,
           {
-            value: state.things[a.name] && state.things[a.name].value || a.data.defaultValue || (a.data.validate && a.data.validate[0]) || 0,
+            value: validatedValue(state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0, a.data.validate),
             data: a.data,
             collection: state.things[a.name] && state.things[a.name].collection || [],
           },
