@@ -12,18 +12,19 @@ import Html from 'components/html';
 
 const readStore = () => {
   let storeState;
-  fs.readFile('savedstore.json', 'utf8', (err, data) => {
-    if (err) throw (err);
-    try {
-      storeState = JSON.parse(data);
-    } catch (err) {
-      throw (err);
-    } 
-  });
+  const data = fs.readFileSync('savedstore.json', 'utf8');
+  try {
+    console.log('asdfas');
+    storeState = JSON.parse(data);
+  } catch (err) {
+    throw (err);
+  } ;
   return storeState;
 }
 
 const initialState = readStore();
+
+console.log('initial', initialState);
 
 // Configure Redux store
 const store = configureStore(initialState);
