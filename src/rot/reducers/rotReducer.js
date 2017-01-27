@@ -35,12 +35,6 @@ import * as c from '../constants';
 
    --- */
 
-const updateObject = (obj = {}, name, value) => {
-  const updatedObject = {};
-  updatedObject[name] = value;
-  return { ...obj, ...updatedObject };
-};
-
 const updateCollection = (value, device) => {
   if (!value) return false;
   if (!device.data || !device.data.collect) return false;
@@ -69,32 +63,30 @@ export default function rotReducer(state = defaultState, a) {
       const data = a.data || state.things[a.name] && state.things[a.name].data;
       return {
         ...state,
-        things: updateObject(
-          state.things,
-          a.name,
-          {
+        things: {
+          ...state.things,
+          [a.name]: {
             value: validatedValue(a.value, state.things[a.name].data.validate),
             data,
             collection: updateCollection(a.value, state.things[a.name])
               || state.things[a.name].collection
               || [],
           },
-        ),
+        },
       };
     }
 
     case c.REGISTER: {
       return {
         ...state,
-        things: updateObject(
-          state.things,
-          a.name,
-          {
+        things: {
+          ...state.things,
+          [a.name]: {
             value: validatedValue(state.things[a.name] && state.things[a.name].value || a.data.defaultValue || 0, a.data.validate),
             data: a.data,
             collection: state.things[a.name] && state.things[a.name].collection || [],
           },
-        ),
+        },
       };
     }
 
