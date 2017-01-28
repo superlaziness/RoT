@@ -1,9 +1,9 @@
 import TelegramBot from 'node-telegram-bot-api';
 
-const bot_token = '329181543:AAE7wI9K8U-a2321XF_GY7RlTmXGNQbUTWY';
+const bot_token = require('bottoken.js');
 
 export default function telegramBot(getValue, getList) {
-  const bot = new TelegramBot(bot_token, { polling: true });
+  const bot = new TelegramBot(bot_token.token, { polling: true });
 
   bot.on('message', (msg) => {
     const chatId = msg.chat.id;
