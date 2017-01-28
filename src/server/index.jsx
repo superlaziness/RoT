@@ -10,9 +10,11 @@ import configureStore from 'store';
 import Maco from 'components/maco';
 import Html from 'components/html';
 
+const savedStorePath = './dist/savedstore.json';
+
 const readStore = () => {
   let storeState;
-  const data = fs.readFileSync('savedstore.json', 'utf8');
+  const data = fs.readFileSync(savedStorePath, 'utf8');
   try {
     console.log('asdfas');
     storeState = JSON.parse(data);
@@ -31,7 +33,7 @@ const store = configureStore(initialState);
 
 const writeStore = () => {
   const storeState = store.getState();
-  fs.writeFile('savedstore.json', JSON.stringify(storeState), (err) => {
+  fs.writeFile(savedStorePath, JSON.stringify(storeState), (err) => {
     if (err) throw (err);
   })
 }
