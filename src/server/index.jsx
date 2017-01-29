@@ -14,12 +14,13 @@ const savedStorePath = './dist/savedstore.json';
 
 const readStore = () => {
   let storeState;
-  const data = fs.readFileSync(savedStorePath, 'utf8');
   try {
+    const data = fs.readFileSync(savedStorePath, 'utf8');
     console.log('asdfas');
     storeState = JSON.parse(data);
   } catch (err) {
-    throw (err);
+    console.log ("Can't read savedstore.json \n" + err);
+    storeState = {};
   } ;
   return storeState;
 }

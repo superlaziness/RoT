@@ -1,8 +1,16 @@
 import TelegramBot from 'node-telegram-bot-api';
 
-const bot_token = require('bottoken.js');
+const botTokenPath = 'bottoken.js';  // Path to file, containing telegram bot token;
 
 export default function telegramBot(getValue, getList) {
+
+  try {
+    const bot_token = require(botTokenPath);
+  } catch (err) {
+    console.log('Bot token is missing! \n' + err);
+    return false;
+  }
+
   const bot = new TelegramBot(bot_token.token, { polling: true });
 
   bot.on('message', (msg) => {
